@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- META DATA -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Jieqian Liu">
+
+    <!-- Title -->
+    <title>ANLY501 Project</title>
+
+    <style>
+
+        /* Main Menu CSS */
+        .main-menu-area {
+            background: #f2f8ec;
+        }
+        .main-navigation ul li {
+            display: inline-block;
+            position: relative;
+        }
+        .main-navigation ul li a {
+            padding: 20px 20px;
+            display: block;
+            text-transform: capitalize;
+            color: #113417;
+            font-size: 18px;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+            line-height: 1;
+        }
+        .main-navigation ul li a:before {
+            position: absolute;
+            content: '';
+            height: 36px;
+            width: 100%;
+            background-color: #81b60c;
+            left: 0;
+            border-radius: 50px;
+            z-index: -1;
+            top: 50%;
+            margin-top: -17px;
+            opacity: 0;
+            visibility: hidden;
+            transition: .3s;
+        }
+        .main-navigation ul ul li a:before {
+            display: none;
+        }
+        .main-navigation ul ul li a,
+        .main-navigation ul li a:hover,
+        .main-navigation ul li.current-menu-ancestor > a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+        .main-navigation ul ul li a:hover,
+        .main-navigation ul ul li.current-menu-ancestor > a {
+            background-color: #123416;
+        }
+        .main-navigation ul li a:hover:before,
+        .main-navigation ul li.current-menu-ancestor > a:before {
+            opacity: 1;
+            visibility: visible;
+        }
+        /* Main Menu CSS End*/
+
+        /* Submenu / Dropdown Menu CSS */
+        .main-navigation ul li ul {
+            position: absolute;
+            width: 250px;
+            left: 0;
+            top: 58px;
+            z-index: 2;
+            -webkit-transition: .3s;
+            transition: .3s;
+            visibility: hidden;
+            opacity: 0;
+            background-color: #81b60c;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .main-navigation ul li:hover > ul {
+            opacity: 1;
+            visibility: visible;
+        }
+        .main-navigation ul li ul li a {
+            padding: 14px 20px;
+            line-height: 26px;
+        }
+        .main-navigation ul li ul li {
+            display: block;
+            text-align: left;
+        }
+        .main-navigation ul li ul ul {
+            left: 250px;
+            top: 0;
+        }
+        .main-navigation ul li ul li {
+            border-bottom: 1px solid #e5e5e5;
+        }
+        .main-navigation ul li ul li:last-child {
+            border-bottom: 0;
+        }
+        /* Submenu / Dropdown Menu CSS End */
+
+                /* Tab Layout Two */
+        .cvt-tabs-wrapper.cvt-tab-layout-two {
+            background-color: #f4f5ef;
+            padding: 10px;
+        }
+
+        .cvt-tab-layout-two .nav li a {
+            display: inline-flex;
+            align-items: center;
+            background-color: #ebebe7;
+            margin-right: 10px;
+            color: #123417;
+            font-size: 28px;
+            font-weight: 700;
+            padding: 15px 23px;
+            margin-bottom: 10px;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .cvt-tab-layout-two .nav li a.active,
+        .cvt-tab-layout-two .nav li:hover a {
+            background-color: #123417;
+            color: #ffffff;
+        }
+
+        .cvt-tab-layout-two .tab-content {
+            padding: 25px 30px 45px 30px;
+        }
+
+        .cvt-tab-layout-two .cvt-tab-title {
+            font-size: 36px;
+            line-height: 1.3;
+            margin-bottom: 30px;
+        }
+
+        .cvt-tab-layout-two .cvt-tab-content-wrapper strong {
+            margin-top: 15px;
+        }
+
+        /* Tab Layout Two End */
+
+        /* Team details */
+        .team-member-details-wrapper .cvt-tab-layout-two .tab-content {
+            padding: 0;
+        }
+
+        .team-member-details-wrapper .cvt-tab-layout-two .nav li a {
+            padding: 5px 40px;
+            font-size: 25px;
+            background-color: #ffffff;
+        }
+
+        .team-member-details-wrapper .cvt-tab-layout-two .nav li a.active,
+        .team-member-details-wrapper .cvt-tab-layout-two .nav li:hover a {
+            background-color: #81b60c;
+        }
+
+        .cvt-tab-layout-two .cvt-tab-title {
+            margin-bottom: 10px;
+        }
+
+        .team-member-details-wrapper .cvt-tab-subtitle {
+            color: #81b60c;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            font-size: 17px;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .team-member-details-wrapper .cvt-tab-subtitle a {
+            color: #81b60c;
+        }
+
+        .pict{
+            margin-top: 5px;
+            margin-left: 350px;
+            font-size: 12px;
+            color: dimgray;
+        }
+    </style>
+
+    <!-- Template Stylesheet -->
+    <link rel="stylesheet" href="bootstrap.min.css">
+
+</head>
+
+<body>
+<!-- Header Area -->
+
+<div class="main-menu-area">
+    <nav class="main-navigation">
+        <ul id="main-menu" class="menu">
+            <li><a href="index.html">Introduction</a> </li>
+            <li><a href="data-gathering.html">Data Gathering</a></li>
+            <li><a href="data-cleaning.html">Data Cleaning</a></li>
+            <li><a href="exploring-data.html">Exploring Data</a></li>
+            <li><a href="clustering.html">Clustering</a></li>
+            <li class="current-menu-ancestor"><a href="arm-networking.html">ARM and Networking</a></li>
+            <li><a href="decision-trees.html">Decision Trees</a></li>
+            <li><a href="naïve-bayes.html">Naïve Bayes</a></li>
+            <li><a href="svm.html">SVM</a></li>
+            <li><a href="conclusions.html">Conclusions</a></li>
+        </ul>
+    </nav>
+</div>
+<!-- Header Area End-->
+
+
+<!-- Team Member Details -->
+<section class="team-member-details-wrapper">
+    <div class="container">
+        <div class="cvt-tabs-wrapper cvt-tab-layout-two">
+            <ul class="nav nav-tabs">
+                <li>
+                    <a class="active" data-toggle="tab" href="#tab-number-1">
+                        <span class="cvt-tab-menu-text">ARM and Networking</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane active show" id="tab-number-1">
+                    <div class="cvt-tab-content-wrapper">
+                        <div class="tab-description">
+                            <h3 class="cvt-tab-title">Amazon Reviews</h3>
+                            <p>Reviews is one of the most important part when we purchase goods on Amazon.
+                            Therefore, in an attempt to understand the reviews's focus on all kinds of products,
+                            Association Rule Mining(ARM) was chosen to perform an analysis on Amazon reviews. <p>
+                            <span class="cvt-tab-subtitle"># Transaction Data and Code</span>
+                            <p>A sample of the transaction data is <a href="ARM%20Networking/transaction.csv">here</a>.</p>
+                            <img src="ARM%20Networking/transaction%20data.PNG" style=" max-width: 80%; height: auto; margin-left: 80px;">
+                            <p class="pict">Screenshot: overview of transaction data</p>
+                            The ARM and network visualization code in R can be seen <a href="ARM%20Networking/ARM_R_Code.html">here</a>.
+                            <p></p>
+                            <span class="cvt-tab-subtitle"># Top items and rules in ARM</span>
+                            <p>Below is an Apriori Association Rule Mining(ARM) analysis that
+                                identifies frequently occurring patterns, correlations, and associations between words.
+                                Support, Confidence, and Lift are used to identify frequent item sets, word combinations in this case.
+                                And these are the top 20 items and top 15 rules generated by different metrics.</p>
+                            <img src="ARM%20Networking/top_item_confidence.PNG" style=" max-width: 80%; height: 80%; margin-left: 100px;">
+                            <p class="pict">Top 20 Items sorted by confident</p>
+                            <img src="ARM%20Networking/top_item_support.PNG"style=" max-width: 80%; height: 80%; margin-left: 100px;">
+                            <p class="pict">Top 20 Items sorted by support</p>
+                            <img src="ARM%20Networking/top_item_lift.PNG"style=" max-width: 80%; height: 80%; margin-left: 100px;">
+                            <p class="pict">Top 20 Items sorted by lift</p>
+
+                            <img src="ARM%20Networking/top_rules_confidence.PNG"style=" max-width: 80%; height: 80%; margin-left: 200px;">
+                            <p class="pict">Top15 Rules sorted by confident</p>
+                            <img src="ARM%20Networking/top_rules_support.PNG"style=" max-width: 80%; height: 80%; margin-left: 250px;">
+                            <p class="pict">Top 15 Rules sorted by support</p>
+                            <img src="ARM%20Networking/top_rules_lift.PNG"style=" max-width: 80%; height: 80%; margin-left: 250px;">
+                            <p class="pict">Top 15 Rules sorted by lift</p>
+                            <p></p>
+
+                            <span class="cvt-tab-subtitle"># iGraph Network</span>
+                            <p>Below is 3 igraph plots illustrating the relationships between words and groups of words in the reviews data. The nodes are the points and are labelled with a word that appears in the dataset or a group of words. The edges are the lines between the nodes, and they depict the relationships between nodes. We can see that there are 4 main clusters of words that are highly related to each other/commonly seen together.</p>
+                            <img src="ARM%20Networking/igraph_support.PNG"style=" max-width: 80%; height: 80%; margin-left: 100px;">
+                            <p class="pict">Support iGraph Network</p>
+                            <img src="ARM%20Networking/igraph_confidence.PNG"style=" max-width: 80%; height: 80%; margin-left: 100px;">
+                            <p class="pict">Confidence iGraph Network</p>
+                            <img src="ARM%20Networking/igraph_lift.PNG"style=" max-width: 80%; height: 80%; margin-left: 100px;">
+                            <p class="pict">Lift iGraph Network</p>
+                            <p></p>
+
+                            <span class="cvt-tab-subtitle"># arulesVis</span>
+                            <p>Below is an interactive VisNetwork graph depicting the same nodes and edges as the two graphs above. Click on the dropdown to highlight specific nodes and relationships of interest.</p>
+                            <iframe src="ARM%20Networking/network.html" width="80%" height="500" style="background: transparent; border: 1px solid #ccc; margin-left: 100px"></iframe>
+                            <p>Click <a href="ARM%20Networking/network.html">HERE</a> to open in a new tab. </p>
+                          <p></p>
+
+                            <span class="cvt-tab-subtitle"># Force Network</span>
+                            <p>Below is an interactive Network D3 graph depicting the same nodes and edges as the graph above. Click on the nodes to drag them around and more easily view them.</p>
+                             <object data="ARM%20Networking/force_network.html" width="80%" style="margin-left: 100px; height: 620px"></object>
+                            <p>Click <a href="ARM%20Networking/force_network.html">HERE</a> to open in a new tab. </p>
+                            <p></p>
+
+                            <span class="cvt-tab-subtitle"># Sankey Chart</span>
+                            <p>"Lift" is used to generate a Sankey chart, which nicely visualizes the dependency flow between words and phrases. </p>
+                            <object data="ARM%20Networking/sankey.html" width="80%" height="500px" style="margin-left: 100px;"></object>
+                            <p>Click <a href="ARM%20Networking/sankey.html">HERE</a> to open in a new tab. </p>
+
+                            <p></p>
+
+                            <span class="cvt-tab-subtitle"># Summary</span>
+                            <p>Association Rule Mining (ARM) is a method of analysis that utilizes relational information to identify items that appear frequently together.
+                                Here, this analysis looks specifically at which words frequently appear together across hundreds of reviews.
+                            One can clearly see by the relationships described that there were several words that were commonly used for reviews.
+                            In the figures above, one can see that there are 4 main groups of words that commonly appear in reviews together.
+                            </p>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Team Member Details End -->
+
+<!-- Template Scripts -->
+<script src="jquery-3.5.1.min.js"></script>
+<script src="bootstrap.min.js"></script>
+</body>
+</html>

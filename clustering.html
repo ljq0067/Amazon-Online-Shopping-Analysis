@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- META DATA -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Jieqian Liu">
+
+    <!-- Title -->
+    <title>ANLY501 Project</title>
+
+    <style>
+        img {
+            max-width: 80%;
+            height: auto;
+            margin-left: 80px;
+        }
+        /* Main Menu CSS */
+        .main-menu-area {
+            background: #f2f8ec;
+        }
+        .main-navigation ul li {
+            display: inline-block;
+            position: relative;
+        }
+        .main-navigation ul li a {
+            padding: 20px 20px;
+            display: block;
+            text-transform: capitalize;
+            color: #113417;
+            font-size: 18px;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+            line-height: 1;
+        }
+        .main-navigation ul li a:before {
+            position: absolute;
+            content: '';
+            height: 36px;
+            width: 100%;
+            background-color: #81b60c;
+            left: 0;
+            border-radius: 50px;
+            z-index: -1;
+            top: 50%;
+            margin-top: -17px;
+            opacity: 0;
+            visibility: hidden;
+            transition: .3s;
+        }
+        .main-navigation ul ul li a:before {
+            display: none;
+        }
+        .main-navigation ul ul li a,
+        .main-navigation ul li a:hover,
+        .main-navigation ul li.current-menu-ancestor > a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+        .main-navigation ul ul li a:hover,
+        .main-navigation ul ul li.current-menu-ancestor > a {
+            background-color: #123416;
+        }
+        .main-navigation ul li a:hover:before,
+        .main-navigation ul li.current-menu-ancestor > a:before {
+            opacity: 1;
+            visibility: visible;
+        }
+        /* Main Menu CSS End*/
+
+        /* Submenu / Dropdown Menu CSS */
+        .main-navigation ul li ul {
+            position: absolute;
+            width: 250px;
+            left: 0;
+            top: 58px;
+            z-index: 2;
+            -webkit-transition: .3s;
+            transition: .3s;
+            visibility: hidden;
+            opacity: 0;
+            background-color: #81b60c;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .main-navigation ul li:hover > ul {
+            opacity: 1;
+            visibility: visible;
+        }
+        .main-navigation ul li ul li a {
+            padding: 14px 20px;
+            line-height: 26px;
+        }
+        .main-navigation ul li ul li {
+            display: block;
+            text-align: left;
+        }
+        .main-navigation ul li ul ul {
+            left: 250px;
+            top: 0;
+        }
+        .main-navigation ul li ul li {
+            border-bottom: 1px solid #e5e5e5;
+        }
+        .main-navigation ul li ul li:last-child {
+            border-bottom: 0;
+        }
+        /* Submenu / Dropdown Menu CSS End */
+
+                /* Tab Layout Two */
+        .cvt-tabs-wrapper.cvt-tab-layout-two {
+            background-color: #f4f5ef;
+            padding: 10px;
+        }
+
+        .cvt-tab-layout-two .nav li a {
+            display: inline-flex;
+            align-items: center;
+            background-color: #ebebe7;
+            margin-right: 10px;
+            color: #123417;
+            font-size: 28px;
+            font-weight: 700;
+            padding: 15px 23px;
+            margin-bottom: 10px;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .cvt-tab-layout-two .nav li a.active,
+        .cvt-tab-layout-two .nav li:hover a {
+            background-color: #123417;
+            color: #ffffff;
+        }
+
+        .cvt-tab-layout-two .tab-content {
+            padding: 25px 30px 45px 30px;
+        }
+
+        .cvt-tab-layout-two .cvt-tab-title {
+            font-size: 36px;
+            line-height: 1.3;
+            margin-bottom: 30px;
+        }
+
+        .cvt-tab-layout-two .cvt-tab-content-wrapper strong {
+            margin-top: 15px;
+        }
+
+        /* Tab Layout Two End */
+
+        /* Team details */
+        .team-member-details-wrapper .cvt-tab-layout-two .tab-content {
+            padding: 0;
+        }
+
+        .team-member-details-wrapper .cvt-tab-layout-two .nav li a {
+            padding: 5px 40px;
+            font-size: 25px;
+            background-color: #ffffff;
+        }
+
+        .team-member-details-wrapper .cvt-tab-layout-two .nav li a.active,
+        .team-member-details-wrapper .cvt-tab-layout-two .nav li:hover a {
+            background-color: #81b60c;
+        }
+
+        .cvt-tab-layout-two .cvt-tab-title {
+            margin-bottom: 10px;
+        }
+
+        .team-member-details-wrapper .cvt-tab-subtitle {
+            color: #81b60c;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            font-size: 17px;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .team-member-details-wrapper .cvt-tab-subtitle a {
+            color: #81b60c;
+        }
+
+        .pict{
+            margin-top: 5px;
+            margin-left: 350px;
+            font-size: 12px;
+            color: dimgray;
+        }
+    </style>
+
+    <!-- Template Stylesheet -->
+    <link rel="stylesheet" href="bootstrap.min.css">
+
+</head>
+
+<body>
+<!-- Header Area -->
+
+<div class="main-menu-area">
+    <nav class="main-navigation">
+        <ul id="main-menu" class="menu">
+            <li><a href="index.html">Introduction</a> </li>
+            <li><a href="data-gathering.html">Data Gathering</a></li>
+            <li><a href="data-cleaning.html">Data Cleaning</a></li>
+            <li><a href="exploring-data.html">Exploring Data</a></li>
+            <li class="current-menu-ancestor"><a href="clustering.html">Clustering</a></li>
+            <li><a href="arm-networking.html">ARM and Networking</a></li>
+            <li><a href="decision-trees.html">Decision Trees</a></li>
+            <li><a href="naïve-bayes.html">Naïve Bayes</a></li>
+            <li><a href="svm.html">SVM</a></li>
+            <li><a href="conclusions.html">Conclusions</a></li>
+        </ul>
+    </nav>
+</div>
+<!-- Header Area End-->
+
+
+<!-- Team Member Details -->
+<section class="team-member-details-wrapper">
+    <div class="container">
+        <div class="cvt-tabs-wrapper cvt-tab-layout-two">
+            <ul class="nav nav-tabs">
+                <li>
+                    <a class="active" data-toggle="tab" href="#tab-number-1">
+                        <span class="cvt-tab-menu-text">Clustering Text Data by Python</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a data-toggle="tab" href="#tab-number-2">
+                        <span class="cvt-tab-menu-text">Clustering Record Data by R</span>
+                    </a>
+                </li>
+
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane active show" id="tab-number-1">
+                    <div class="cvt-tab-content-wrapper">
+                        <div class="tab-description">
+                            <h3 class="cvt-tab-title">Text Data Clustering</h3>
+                            <span class="cvt-tab-subtitle"># Raw Data</span>
+                            <p>Text data from reviews data was used for the following clustering process.<p>
+                            <p>A sample of the data is <a href="clustering/assignment/text%20clustering%20python/review_count.csv">here</a>.</p>
+                            <img src="clustering/assignment/text%20clustering%20python/raw%20text%20data.PNG">
+                            <p class="pict">Screenshot: head part for raw text data</p>
+                            The python code can be seen <a href="clustering/assignment/text%20clustering%20python/clustering.py">here</a>.
+                            <p></p>
+                            <span class="cvt-tab-subtitle"># WordCloud</span>
+                            <p>A wordcloud was used to visualize the words and their relative frequencies in the dataset.
+                                Stopwords and superfluous words were removed via NLTK words package,
+                                allowing one to get a better idea of the more important words in these articles.</p>
+                            <img src="clustering/assignment/text%20clustering%20python/wordcloud.png">
+                            <p></p>
+                            <span class="cvt-tab-subtitle"># Determining Optimal K</span>
+                            <p>Before moving forward with k-means clustering,
+                                the elbow and silhouette methods were used to determine the optimal k for clustering.</p>
+                            <img src="clustering/assignment/text%20clustering%20python/elbow graph.png">
+                            <img src="clustering/assignment/text%20clustering%20python/silhouette graph.png">
+                            <p>Both the Elbow Graph and Silhouette Graph illustrate that the optimal number of clusters would be 4.
+                                Moving forward with the clustering analysis, 4, 3, and 2 clusters will be calculated and compared.</p>
+                            <p></p>
+                            <span class="cvt-tab-subtitle"># K-Means Clustering</span>
+                            <p>PCA was used to reduce the dimensionality of the data.
+                            That there isn't a lot of variation within the data.
+                                This is most likely due to the fact that throughout the reviews,
+                                the language used is highly differential,
+                                leading itself to a lot of unique words occurred as opposed to fewer but more frequent words.</p>
+                            <img src="clustering/assignment/text%20clustering%20python/PCA1.png">
+                            <img src="clustering/assignment/text%20clustering%20python/PCA2.png">
+                            <p>The following illustrate the frequencies of points falling into each cluster for clusters of size 2, 3 and 4.
+                                As one can see, k=4 does the best job of clustering (while not by a hugely significant amount).</p>
+                            <img src="clustering/assignment/text%20clustering%20python/kmeans%202.png">
+                            <p class="pict">plot of kmeans clustering when k=2</p>
+                            <img src="clustering/assignment/text%20clustering%20python/kmeans%203.png">
+                            <p class="pict">plot of kmeans clustering when k=3</p>
+                            <img src="clustering/assignment/text%20clustering%20python/kmeans%204.png">
+                            <p class="pict">plot of kmeans clustering when k=4</p>
+                            <p></p>
+                            <span class="cvt-tab-subtitle"># Hierarchical Clustering and DBSCAN</span>
+                            <p>Hierarchical Clustering and DBSCAN were used to look at alternative means of clustering.</p>
+                            <img src="clustering/assignment/text%20clustering%20python/Hierarchical.png">
+                            <p class="pict">dendrogram of the hierarchical clustering</p>
+                            <img src="clustering/assignment/text%20clustering%20python/DBSCAN.png">
+                            <p class="pict">the scatter output of the DBSCAN</p>
+                            <p>These results show around 4 clusters which aligns with what was found at the beginning of the analysis.
+                                Additionally, the dendrogram allows one to see the relative closeness of a datapoint to another which can be helpful in comparison.</p>
+                            <p></p>
+                            <span class="cvt-tab-subtitle"># Summary</span>
+                            <p>Overall, it is clear that this text data didn't cluster well.
+                                While this analysis supported the proposition that k=4 would lead itself to optimal clustering,
+                                it did not preform significanlty better than the other sizes of clusters that were explored.
+                                As mentioned previously, this is most likely due to the data being highly variable - meaning that there is high differentiability in the words used throughout these reviews.</p>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="tab-number-2">
+                    <div class="cvt-tab-content-wrapper">
+                        <div class="tab-description">
+                            <h3 class="cvt-tab-title">Record Data Clustering</h3>
+                            <span class="cvt-tab-subtitle"># Raw Data</span>
+                            <p>Record data from the sales rank of product json files was cleaned and used for the following clustering process.
+                                It has 80 rows and 9 columns following removal of the label column 'title' for clustering.</p>
+                            <p>The data is <a href="clustering/assignment/record%20clustering%20R/sales%20rank1.csv">here</a>.</p>
+                            <img src="clustering/assignment/record%20clustering%20R/record%20raw%20data.PNG">
+                            <p class="pict">Screenshot: head part for raw record data</p>
+                            The R code can be seen <a href="clustering/assignment/record%20clustering%20R/clustering_R.Rmd">here</a>.
+                            <p></p>
+                            <span class="cvt-tab-subtitle"># Determining Optimal K</span>
+                            <p>Four different methods were used to determine optimal k for K-means clustering.</p>
+                            <p>First, a simple elbow graph was created to help visualize optimal K.
+                                From the graph is appears as if k=4 would be the best fit as that is where the most significant change in slope is seen.</p>
+                            <img src="clustering/assignment/record%20clustering%20R/elbow%20graph.png">
+                            <p>A silhouette graph was used to check the results obtained via the elbow plot.
+                                This graph was interesting in that it suggested that k=2 would be a more-optimal k for K-Means clustering.</p>
+                            <img src="clustering/assignment/record%20clustering%20R/silhouette%20graph.png">
+                            <p>A barplot of the number of clusters was also created and further indicated that the optimal k would be 2.</p>
+                            <img src="clustering/assignment/record%20clustering%20R/number%20of%20clustering.png">
+                            <p>Finally, the elbow method was used one final time, this time is within sum squares and it also indicated k=2 being the optimal K for K-Means clustering.</p>
+                            <img src="clustering/assignment/record%20clustering%20R/elbow%20final.png">
+                            <p></p>
+                            <span class="cvt-tab-subtitle"># K-Means Clustering</span>
+                            <p>K-Means clustering with Euclidian distance was calculated for clusters of three different sizes:
+                                2 (determined to be optimal K), 3, and 4. The results are as follows:</p>
+                            <img src="clustering/assignment/record%20clustering%20R/kmeans%202.png">
+                            <p class="pict">plot of kmeans clustering when k=2</p>
+                            <img src="clustering/assignment/record%20clustering%20R/kmeans%203.png">
+                            <p class="pict">plot of kmeans clustering when k=3</p>
+                            <img src="clustering/assignment/record%20clustering%20R/kmeans%204.png">
+                            <p class="pict">plot of kmeans clustering when k=4</p>
+                            <p>After illustrating three different sized K clusters, it is apparent that the optimal cluster size is 2,
+                                following the analysis preformed earlier to determine optimal K.</p>
+                            <p></p>
+                            <span class="cvt-tab-subtitle"># Hierarchical Clustering</span>
+                            <p>The dendrogram for the hierarchical clustering is as follows.
+                                Given that there are a significant number of rows in the dataset,
+                                the dendrogram is a bit complex; however, it clearly illustrates where the two clusters lie.</p>
+                            <img src="clustering/assignment/record%20clustering%20R/dendrogram%20for%20hierarchical.png">
+                            <p></p>
+                            <span class="cvt-tab-subtitle"># Distance Metrics</span>
+                            <p>Three distance metrics were computed and compared:
+                                Euclidean Distance, Manhattan Distance, and Cosine Distance. The results are as follows:</p>
+                            <img src="clustering/assignment/record%20clustering%20R/Euclidean.png">
+                            <p class="pict">plot of Euclidean Heatmap</p>
+                            <img src="clustering/assignment/record%20clustering%20R/Manhattan.png">
+                            <p class="pict">plot of Manhattan Heatmap</p>
+                            <img src="clustering/assignment/record%20clustering%20R/Cosine.png">
+                            <p class="pict">plot of Cosine Heatmap</p>
+                            <p></p>
+                            <span class="cvt-tab-subtitle"># Summary</span>
+                            <p>Overall, it is clear that this record data clusters well into two clusters.
+                                This was first seen with the silhouette graph, bar plot, and within sum of squares elbow plots all indicating that a k=2 would be the optimal choice.
+                                Once the clusters were created and compared, this result became even more evident.
+                                It is also important to note that there is some variability in these clusters as is evident by the data point in the upper left-hand corner.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Team Member Details End -->
+
+<!-- Template Scripts -->
+<script src="jquery-3.5.1.min.js"></script>
+<script src="bootstrap.min.js"></script>
+</body>
+</html>

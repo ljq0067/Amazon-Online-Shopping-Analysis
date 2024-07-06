@@ -1,0 +1,173 @@
+---
+title: "ARM_R_code"
+author: "Jieqian Liu"
+output: 
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(arules)
+RedditTrans <- read.transactions(
+"transaction.csv", 
+format = "basket",      #basket or single 
+sep = ",",
+header=F)
+
+# 0.005 200 records
+RedditTrans_rules = arules::apriori(RedditTrans,
+                                   parameter = list(support=.006,
+                                    conf=.006, minlen=2, maxtime=0, maxlen=20))
+
+inspect(RedditTrans_rules[1:20])
+
+##  Sort by Conf
+SortedRules_conf <- sort(RedditTrans_rules, by="confidence", decreasing=TRUE)
+inspect(SortedRules_conf[1:20])
+
+## Sort by Sup
+SortedRules_sup <- sort(RedditTrans_rules, by="support", decreasing=TRUE)
+inspect(SortedRules_sup[1:20])
+
+## Sort by Lift
+SortedRules_lift <- sort(RedditTrans_rules, by="lift", decreasing=TRUE)
+inspect(SortedRules_lift[1:20])
+```
+
+```{r}
+library(dplyr)
+library(base64enc)
+library(tokenizers)
+library(rlang)
+
+## Convert the RULES to a DATAFRAME
+Rules_DF2<-DATAFRAME(RedditTrans_rules[1:100], separate = TRUE)
+(head(Rules_DF2))
+
+str(Rules_DF2)
+
+## Remove all {}
+Rules_DF2[] <- lapply(Rules_DF2, gsub, pattern='[{]', replacement='')
+Rules_DF2[] <- lapply(Rules_DF2, gsub, pattern='[}]', replacement='')
+
+Rules_L<-Rules_DF2[c(1,2,5)]
+names(Rules_L) <- c("SourceName", "TargetName", "Weight")
+head(Rules_L,30)
+
+## USING SUP
+Rules_S<-Rules_DF2[c(1,2,3)]
+names(Rules_S) <- c("SourceName", "TargetName", "Weight")
+head(Rules_S,30)
+
+## USING CONF
+Rules_C<-Rules_DF2[c(1,2,4)]
+names(Rules_C) <- c("SourceName", "TargetName", "Weight")
+head(Rules_C,30)
+
+write.csv(Rules_L,"reviews_lift.csv", row.names = FALSE)
+write.csv(Rules_S,"reviews_support.csv", row.names = FALSE)
+write.csv(Rules_C,"reviews_confidence.csv", row.names = FALSE)
+```
+
+```{r}
+library(arulesViz)
+library(plotly)
+
+p <- plot(RedditTrans_rules, max=50, method = "graph",  engine = "htmlwidget")
+htmlwidgets::saveWidget(as_widget(p), "network.html")
+```
+
+```{r}
+library(igraph)
+
+Rules_Sup <- read.csv("reviews_support.csv", 
+                    sep = ",",colClasses=c(NA,NA, NA))
+
+edgeList<-Rules_Sup
+MyGraph <- igraph::simplify(igraph::graph.data.frame(edgeList, directed=TRUE))
+write_graph(MyGraph, "support.html")
+plot(MyGraph)
+
+Rules_Con <- read.csv("reviews_confidence.csv", 
+                    sep = ",",colClasses=c(NA,NA,NA))
+
+edgeList<-Rules_Con
+MyGraph <- igraph::simplify(igraph::graph.data.frame(edgeList, directed=TRUE))
+write_graph(MyGraph, "confidence.html")
+plot(MyGraph)
+
+
+Rules_Lift <- read.csv("reviews_lift.csv", 
+                    sep = ",",colClasses=c(NA,NA,NA))
+
+edgeList<-Rules_Lift
+MyGraph <- igraph::simplify(igraph::graph.data.frame(edgeList, directed=TRUE))
+write_graph(MyGraph, "lift.html")
+plot(MyGraph)
+```
+
+```{r}
+library(networkD3)
+Rules_Lift <- read.csv("reviews_lift.csv", 
+                    sep = ",",colClasses=c(NA,NA,NA))
+edgeList<-Rules_Lift
+MyGraph <- igraph::simplify(igraph::graph.data.frame(edgeList, directed=TRUE))
+
+nodeList <- data.frame(ID = c(0:(igraph::vcount(MyGraph) - 1)), 
+                       nName = igraph::V(MyGraph)$name)
+
+
+## Node Degree
+nodeList <- cbind(nodeList, nodeDegree=igraph::degree(MyGraph, 
+            v = igraph::V(MyGraph), mode = "all"))
+
+## Betweenness
+BetweenNess <- igraph::betweenness(MyGraph, 
+                                   v = igraph::V(MyGraph), 
+                                   directed = TRUE)
+
+nodeList <- cbind(nodeList, nodeBetweenness=BetweenNess)
+
+getNodeID <- function(x){
+  which(x == igraph::V(MyGraph)$name) - 1  #IDs start at 0
+}
+
+edgeList <- plyr::ddply(
+  Rules_Sup, .variables = c("SourceName", "TargetName" , "Weight"), 
+  function (x) data.frame(SourceID = getNodeID(x$SourceName), 
+                          TargetID = getNodeID(x$TargetName)))
+
+graph <- networkD3::sankeyNetwork(Links = edgeList, 
+                         Nodes = nodeList, 
+                         Source = "SourceID",
+                         Target = "TargetID", 
+                         Value = "Weight", 
+                         NodeID = "nName",
+                         fontSize = 14)
+networkD3::saveNetwork(graph, 
+                       "sankey.html", selfcontained = TRUE)
+networkD3::sankeyNetwork(Links = edgeList, 
+                         Nodes = nodeList, 
+                         Source = "SourceID",
+                         Target = "TargetID", 
+                         Value = "Weight", 
+                         NodeID = "nName",
+                         fontSize = 14)
+
+(MyD3<-networkD3::forceNetwork(Links = edgeList, 
+                               Nodes = nodeList, 
+                               Source = "SourceID",
+                               Target = "TargetID", 
+                               Value = "Weight", 
+                               NodeID = "nName",
+                               Group = "nodeDegree", 
+                               opacity = 0.9
+))
+
+networkD3::saveNetwork(MyD3, 
+                       "force_network.html", selfcontained = TRUE)
+```
