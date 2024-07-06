@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- META DATA -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Jieqian Liu">
+
+    <!-- Title -->
+    <title>ANLY501 Project</title>
+
+    <style>
+
+        /* Main Menu CSS */
+        .main-menu-area {
+            background: #f2f8ec;
+        }
+        .main-navigation ul li {
+            display: inline-block;
+            position: relative;
+        }
+        .main-navigation ul li a {
+            padding: 20px 20px;
+            display: block;
+            text-transform: capitalize;
+            color: #113417;
+            font-size: 18px;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+            line-height: 1;
+        }
+        .main-navigation ul li a:before {
+            position: absolute;
+            content: '';
+            height: 36px;
+            width: 100%;
+            background-color: #81b60c;
+            left: 0;
+            border-radius: 50px;
+            z-index: -1;
+            top: 50%;
+            margin-top: -17px;
+            opacity: 0;
+            visibility: hidden;
+            transition: .3s;
+        }
+        .main-navigation ul ul li a:before {
+            display: none;
+        }
+        .main-navigation ul ul li a,
+        .main-navigation ul li a:hover,
+        .main-navigation ul li.current-menu-ancestor > a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+        .main-navigation ul ul li a:hover,
+        .main-navigation ul ul li.current-menu-ancestor > a {
+            background-color: #123416;
+        }
+        .main-navigation ul li a:hover:before,
+        .main-navigation ul li.current-menu-ancestor > a:before {
+            opacity: 1;
+            visibility: visible;
+        }
+        /* Main Menu CSS End*/
+
+        /* Submenu / Dropdown Menu CSS */
+        .main-navigation ul li ul {
+            position: absolute;
+            width: 250px;
+            left: 0;
+            top: 58px;
+            z-index: 2;
+            -webkit-transition: .3s;
+            transition: .3s;
+            visibility: hidden;
+            opacity: 0;
+            background-color: #81b60c;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .main-navigation ul li:hover > ul {
+            opacity: 1;
+            visibility: visible;
+        }
+        .main-navigation ul li ul li a {
+            padding: 14px 20px;
+            line-height: 26px;
+        }
+        .main-navigation ul li ul li {
+            display: block;
+            text-align: left;
+        }
+        .main-navigation ul li ul ul {
+            left: 250px;
+            top: 0;
+        }
+        .main-navigation ul li ul li {
+            border-bottom: 1px solid #e5e5e5;
+        }
+        .main-navigation ul li ul li:last-child {
+            border-bottom: 0;
+        }
+        /* Submenu / Dropdown Menu CSS End */
+
+                /* Tab Layout Two */
+        .cvt-tabs-wrapper.cvt-tab-layout-two {
+            background-color: #f4f5ef;
+            padding: 10px;
+        }
+
+        .cvt-tab-layout-two .nav li a {
+            display: inline-flex;
+            align-items: center;
+            background-color: #ebebe7;
+            margin-right: 10px;
+            color: #123417;
+            font-size: 28px;
+            font-weight: 700;
+            padding: 15px 23px;
+            margin-bottom: 10px;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .cvt-tab-layout-two .nav li a.active,
+        .cvt-tab-layout-two .nav li:hover a {
+            background-color: #123417;
+            color: #ffffff;
+        }
+
+        .cvt-tab-layout-two .tab-content {
+            padding: 25px 30px 45px 30px;
+        }
+
+        .cvt-tab-layout-two .cvt-tab-title {
+            font-size: 36px;
+            line-height: 1.3;
+            margin-bottom: 30px;
+        }
+
+        .cvt-tab-layout-two .cvt-tab-content-wrapper strong {
+            margin-top: 15px;
+        }
+
+        /* Tab Layout Two End */
+
+        /* Team details */
+        .team-member-details-wrapper .cvt-tab-layout-two .tab-content {
+            padding: 0;
+        }
+
+        .team-member-details-wrapper .cvt-tab-layout-two .nav li a {
+            padding: 5px 40px;
+            font-size: 25px;
+            background-color: #ffffff;
+        }
+
+        .team-member-details-wrapper .cvt-tab-layout-two .nav li a.active,
+        .team-member-details-wrapper .cvt-tab-layout-two .nav li:hover a {
+            background-color: #81b60c;
+        }
+
+        .cvt-tab-layout-two .cvt-tab-title {
+            margin-bottom: 10px;
+        }
+
+        .team-member-details-wrapper .cvt-tab-subtitle {
+            color: #81b60c;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            font-size: 17px;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .team-member-details-wrapper .cvt-tab-subtitle a {
+            color: #81b60c;
+        }
+
+        .pict{
+            margin-top: 5px;
+            font-size: 12px;
+            color: dimgray;
+        }
+    </style>
+
+    <!-- Template Stylesheet -->
+    <link rel="stylesheet" href="bootstrap.min.css">
+
+</head>
+
+<body>
+<!-- Header Area -->
+
+<div class="main-menu-area">
+    <nav class="main-navigation">
+        <ul id="main-menu" class="menu">
+            <li><a href="index.html">Introduction</a> </li>
+            <li><a href="data-gathering.html">Data Gathering</a></li>
+            <li><a href="data-cleaning.html">Data Cleaning</a></li>
+            <li><a href="exploring-data.html">Exploring Data</a></li>
+            <li><a href="clustering.html">Clustering</a></li>
+            <li><a href="arm-networking.html">ARM and Networking</a></li>
+            <li class="current-menu-ancestor"><a href="decision-trees.html">Decision Trees</a></li>
+            <li><a href="naïve-bayes.html">Naïve Bayes</a></li>
+            <li><a href="svm.html">SVM</a></li>
+            <li><a href="conclusions.html">Conclusions</a></li>
+        </ul>
+    </nav>
+</div>
+<!-- Header Area End-->
+
+
+<!-- Team Member Details -->
+<section class="team-member-details-wrapper">
+    <div class="container">
+        <div class="cvt-tabs-wrapper cvt-tab-layout-two">
+            <ul class="nav nav-tabs">
+                <li>
+                    <a class="active" data-toggle="tab" href="#tab-number-1">
+                        <span class="cvt-tab-menu-text">Text Data with Python</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a data-toggle="tab" href="#tab-number-2">
+                        <span class="cvt-tab-menu-text">Record Data with R</span>
+                    </a>
+                </li>
+
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane active show" id="tab-number-1">
+                    <div class="cvt-tab-content-wrapper">
+                        <div class="tab-description">
+                            <h3 class="cvt-tab-title">Fashion Reviews</h3>
+                            <span class="cvt-tab-subtitle"># Raw Data</span>
+                            <p>Text data from fashion reviews data was used for the following process.<p>
+                            <p>A sample of the data is <a href="decision%20trees/text%20data%20python/review_count.csv">here</a>.</p>
+                            <img src="decision%20trees/text%20data%20python/raw%20text%20data.PNG" style=" max-width: 80%; height: auto; margin-left: 80px;">
+                            <p class="pict" style="margin-left: 400px;">Screenshot: head part for raw text data</p>
+                            The python code can be seen <a href="https://github.com/ljq0067/GU-ANLY501-Individual-Project-Profolio/blob/main/decision%20tree/text%20data%20python/text.ipynb">here</a>.
+                            <p></p>
+                            <span class="cvt-tab-subtitle"># WordCloud</span>
+                            <p>A wordcloud was used to visualize the words and their relative frequencies in the dataset.
+                                Stopwords and superfluous words were removed via NLTK words package,
+                                allowing one to get a better idea of the more important words in these articles.</p>
+                            <img src="decision%20trees/text%20data%20python/wordcloud.PNG" style=" max-width: 80%; height: auto; margin-left: 250px;">
+                            <p></p>
+                            <span class="cvt-tab-subtitle"># Desicion Tree 1</span>
+                            <p>The first decision tree using entropy as criterion is trained by word-tokenized (CountVectorizer) data.
+                                Other parameters are max_depth=30, min_samples_split=5, min_samples_leaf=2. The visualization of the tree is shown below.</p>
+                            <iframe src="decision%20trees/text%20data%20python/cls_e.pdf" height= 750px width=100%></iframe>
+                            <p></p>
+                            <p>The confusion matrix and classification report are shown below and the result of training is plotted. It can be seen that the accuracy is 0.86.</p>
+                            <img src="decision%20trees/text%20data%20python/cls_e.png" style=" max-width: 80%; height: auto; margin-left: 250px;">
+                            <p class="pict" style="margin-left: 420px;">confusion matrix and classification report</p>
+                            <img src="decision%20trees/text%20data%20python/cls_e%20result.PNG" style=" max-width: 80%; height: auto; margin-left: 250px;">
+                            <p class="pict" style="margin-left: 450px;">plot for training result</p>
+                            <p></p>
+                            <span class="cvt-tab-subtitle"># Desicion Tree 2</span>
+                            <p>The second decision tree using gini as criterion is trained by word-tokenized (CountVectorizer) data.
+                                Other parameters are max_depth=30, min_samples_split=5, min_samples_leaf=2. The visualization of the tree is shown below.</p>
+                            <iframe src="decision%20trees/text%20data%20python/cls_g.pdf" height= 750px width=100%></iframe>
+                            <p></p>
+                            <p>The confusion matrix and classification report are shown below and the result of training is plotted. It can be seen that the accuracy is 0.88.</p>
+                            <img src="decision%20trees/text%20data%20python/cls_g.png" style=" max-width: 80%; height: auto; margin-left: 250px;">
+                            <p class="pict" style="margin-left: 420px;">confusion matrix and classification report</p>
+                            <img src="decision%20trees/text%20data%20python/cls_g%20result.PNG" style=" max-width: 80%; height: auto; margin-left: 250px;">
+                            <p class="pict" style="margin-left: 450px;">plot for training result</p>
+                            <p></p>
+                             <span class="cvt-tab-subtitle"># Desicion Tree 3</span>
+                            <p>The third decision tree using entropy as criterion is trained by word-tokenized (CountVectorizer) data.
+                                Other parameters are max_depth=30, min_samples_split=5, class_weight=balanced. The visualization of the tree is shown below.</p>
+                            <iframe src="decision%20trees/text%20data%20python/cls_e_bal.pdf" height= 750px width=100%></iframe>
+                            <p></p>
+                            <p>The confusion matrix and classification report are shown below and the result of training is plotted. It can be seen that the accuracy is 0.85.</p>
+                            <img src="decision%20trees/text%20data%20python/cls_e_bal.png" style=" max-width: 80%; height: auto; margin-left: 250px;">
+                            <p class="pict" style="margin-left: 420px;">confusion matrix and classification report</p>
+                            <img src="decision%20trees/text%20data%20python/cls_e_bal%20result.PNG" style=" max-width: 80%; height: auto; margin-left: 250px;">
+                            <p class="pict" style="margin-left: 450px;">plot for training result</p>
+                            <p></p>
+                            <span class="cvt-tab-subtitle"># Desicion Tree 4</span>
+                            <p>The third decision tree using gini as criterion is trained by word-tokenized (CountVectorizer) data.
+                                Other parameters are max_depth=30, min_samples_split=5, class_weight=balanced. The visualization of the tree is shown below.</p>
+                            <iframe src="decision%20trees/text%20data%20python/cls_g_bal.pdf" height= 750px width=100%></iframe>
+                            <p></p>
+                            <p>The confusion matrix and classification report are shown below and the result of training is plotted. It can be seen that the accuracy is 0.86.</p>
+                            <img src="decision%20trees/text%20data%20python/cls_g_bal.png" style=" max-width: 80%; height: auto; margin-left: 250px;">
+                            <p class="pict" style="margin-left: 420px;">confusion matrix and classification report</p>
+                            <img src="decision%20trees/text%20data%20python/cls_g_bal%20result.PNG" style=" max-width: 80%; height: auto; margin-left: 250px;">
+                            <p class="pict" style="margin-left: 450px;">plot for training result</p>
+                            <p></p>
+                            <span class="cvt-tab-subtitle"># Summary</span>
+                            <p>Overall, it is clear that the second one performed best, which using gini as criterion and other parameters are max_depth=30, min_samples_split=5, min_samples_leaf=2 without class weight.</p>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="tab-number-2">
+                    <div class="cvt-tab-content-wrapper">
+                        <div class="tab-description">
+                            <h3 class="cvt-tab-title">Product Price</h3>
+                            <span class="cvt-tab-subtitle"># Raw Data</span>
+                            <p>Record data from the product json files in /data-gathering was cleaned and used for the following process.
+                                The prices are normalized to the previous date, for example, the first price is divided by the second price.
+                                It has 92 rows and 13 columns following removal of the column 'asin'.
+                                Note that the function rpart() can handle missing values, so it is okay to leave NAs in the training data.</p>
+                            <p>The data is <a href="decision%20trees/record%20data%20R/price.csv">here</a>.</p>
+                            <img src="decision%20trees/record%20data%20R/raw%20data.PNG" style=" max-width: 80%; height: auto; margin-left: 80px;">
+                            <p class="pict" style="margin-left: 400px;">Screenshot: head part for raw record data</p>
+                            The R code can be seen <a href="decision%20trees/record%20data%20R/decision%20tree.Rmd">here</a>.
+                            <p></p>
+                            <span class="cvt-tab-subtitle"># The First Tree</span>
+                            <p>For the first tree, all variables were considered using GINI, which resulted in the following tree.</p>
+                            <img src="decision%20trees/record%20data%20R/dt_1.png" style=" max-width: 80%; height: auto; margin-left: 80px;">
+                            <p></p>
+                            <p>Below is the confusion matrix for the first decision tree.</p>
+                            <img src="decision%20trees/record%20data%20R/confusion_matrix1.PNG" style=" max-width: 80%; height: auto; margin-left: 250px;">
+                            <p class="pict" style="margin-left: 420px;">Confusion Matrix for Tree 1</p>
+                            <p>Below is the bar plot of importance of variable for the first decision tree.</p>
+                            <img src="decision%20trees/record%20data%20R/variable_importance_tree1.PNG" style=" max-width: 80%; height: auto; margin-left: 200px;">
+                            <p class="pict" style="margin-left: 420px;">Variable Importance for Tree 1</p>
+                            <p></p>
+                             <span class="cvt-tab-subtitle"># The Second Tree</span>
+                            <p>For the second tree,  the complexity parameter was adjusted to .02 and like the first tree, all variables were considered using GINI.
+                                The following tree provides a simpler version of the first tree.</p>
+                            <img src="decision%20trees/record%20data%20R/dt_2.png" style=" max-width: 80%; height: auto; margin-left: 80px;">
+                            <p></p>
+                            <p>Below is the confusion matrix for the second decision tree.</p>
+                            <img src="decision%20trees/record%20data%20R/confusion_matrix2.PNG" style=" max-width: 80%; height: auto; margin-left: 250px;">
+                            <p class="pict" style="margin-left: 420px;">Confusion Matrix for Tree 2</p>
+                            <p>Below is the bar plot of importance of variable for the second decision tree.</p>
+                            <img src="decision%20trees/record%20data%20R/variable_importance_tree2.PNG" style=" max-width: 80%; height: auto; margin-left: 200px;">
+                            <p class="pict" style="margin-left: 420px;">Variable Importance for Tree 2</p>
+                            <p></p>
+                            <span class="cvt-tab-subtitle"># The Third Tree</span>
+                            <p>For the third tree,  the label is type instead of brand which used in the previous trees, and like the first tree, all variables were considered using GINI.</p>
+                            <img src="decision%20trees/record%20data%20R/dt_3.png" style=" max-width: 80%; height: auto; margin-left: 80px;">
+                            <p></p>
+                            <p>Below is the confusion matrix for the third decision tree.</p>
+                            <img src="decision%20trees/record%20data%20R/confusion_matrix3.PNG" style=" max-width: 80%; height: auto; margin-left: 250px;">
+                            <p class="pict" style="margin-left: 420px;">Confusion Matrix for Tree 3</p>
+                            <p>Below is the bar plot of importance of variable for the third decision tree.</p>
+                            <img src="decision%20trees/record%20data%20R/variable_importance_tree3.PNG" style=" max-width: 80%; height: auto; margin-left: 200px;">
+                            <p class="pict" style="margin-left: 420px;">Variable Importance for Tree 3</p>
+                            <p></p>
+                            <span class="cvt-tab-subtitle"># Summary</span>
+                            <p>In this section, three decision trees are used to classify the price of products from different brands or types.
+                                By using the relative time prices, the labels(brands and types) may be predicted.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Team Member Details End -->
+
+<!-- Template Scripts -->
+<script src="jquery-3.5.1.min.js"></script>
+<script src="bootstrap.min.js"></script>
+</body>
+</html>

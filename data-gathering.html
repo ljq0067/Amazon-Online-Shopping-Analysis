@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- META DATA -->
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="Jieqian Liu" name="author">
+
+    <!-- Title -->
+    <title>ANLY501 Project</title>
+
+    <style>
+        img {
+            max-width: 80%;
+            height: auto;
+            margin-left: 85px;
+        }
+
+        /* Main Menu CSS */
+        .main-menu-area {
+            background: #f2f8ec;
+        }
+
+        .main-navigation ul li {
+            display: inline-block;
+            position: relative;
+
+        }
+
+        .main-navigation ul li a {
+            padding: 20px 20px;
+            display: block;
+            text-transform: capitalize;
+            color: #113417;
+            font-size: 18px;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+            line-height: 1;
+        }
+
+        .main-navigation ul li a:before {
+            position: absolute;
+            content: '';
+            height: 36px;
+            width: 100%;
+            background-color: #81b60c;
+            left: 0;
+            border-radius: 50px;
+            z-index: -1;
+            top: 50%;
+            margin-top: -17px;
+            opacity: 0;
+            visibility: hidden;
+            transition: .3s;
+        }
+
+        .main-navigation ul ul li a:before {
+            display: none;
+        }
+
+        .main-navigation ul ul li a,
+        .main-navigation ul li a:hover,
+        .main-navigation ul li.current-menu-item > a,
+        .main-navigation ul li.current-menu-ancestor > a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .main-navigation ul ul li a:hover,
+        .main-navigation ul ul li.current-menu-item > a,
+        .main-navigation ul ul li.current-menu-ancestor > a {
+            background-color: #123416;
+        }
+
+        .main-navigation ul li a:hover:before,
+        .main-navigation ul li.current-menu-item > a:before,
+        .main-navigation ul li.current-menu-ancestor > a:before {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Main Menu CSS End*/
+
+        /* Submenu / Dropdown Menu CSS */
+        .main-navigation ul li ul {
+            position: absolute;
+            width: 250px;
+            left: 0;
+            top: 58px;
+            z-index: 2;
+            -webkit-transition: .3s;
+            transition: .3s;
+            visibility: hidden;
+            opacity: 0;
+            background-color: #81b60c;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .main-navigation ul li:hover > ul {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .main-navigation ul li ul li a {
+            padding: 14px 20px;
+            line-height: 26px;
+        }
+
+        .main-navigation ul li ul li {
+            display: block;
+            text-align: left;
+        }
+
+        .main-navigation ul li ul ul {
+            left: 250px;
+            top: 0;
+        }
+
+        .main-navigation ul li ul li {
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .main-navigation ul li ul li:last-child {
+            border-bottom: 0;
+        }
+
+        /* Submenu / Dropdown Menu CSS End */
+
+        /* Tab Layout Two */
+        .cvt-tabs-wrapper.cvt-tab-layout-two {
+            background-color: #f4f5ef;
+            padding: 10px;
+        }
+
+        .cvt-tab-layout-two .nav li a {
+            display: inline-flex;
+            align-items: center;
+            background-color: #ebebe7;
+            margin-right: 10px;
+            color: #123417;
+            font-size: 28px;
+            font-weight: 700;
+            padding: 15px 23px;
+            margin-bottom: 10px;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .cvt-tab-layout-two .nav li a.active,
+        .cvt-tab-layout-two .nav li:hover a {
+            background-color: #123417;
+            color: #ffffff;
+        }
+
+        .cvt-tab-layout-two .tab-content {
+            padding: 25px 30px 45px 30px;
+        }
+
+        .cvt-tab-layout-two .cvt-tab-title {
+            font-size: 36px;
+            line-height: 1.3;
+            margin-bottom: 30px;
+        }
+
+        .cvt-tab-layout-two .cvt-tab-content-wrapper strong {
+            margin-top: 15px;
+        }
+
+        /* Tab Layout Two End */
+
+        /* Team details */
+        .team-member-details-wrapper .cvt-tab-layout-two .tab-content {
+            padding: 0;
+        }
+
+        .team-member-details-wrapper .cvt-tab-layout-two .nav li a {
+            padding: 5px 40px;
+            font-size: 25px;
+            background-color: #ffffff;
+        }
+
+        .team-member-details-wrapper .cvt-tab-layout-two .nav li a.active,
+        .team-member-details-wrapper .cvt-tab-layout-two .nav li:hover a {
+            background-color: #81b60c;
+        }
+
+        .cvt-tab-layout-two .cvt-tab-title {
+            margin-bottom: 10px;
+        }
+
+        .team-member-details-wrapper .cvt-tab-subtitle {
+            color: #81b60c;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            font-size: 17px;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .team-member-details-wrapper .cvt-tab-subtitle a {
+            color: #81b60c;
+        }
+
+        .pict{
+            margin-top: 5px;
+            margin-left: 350px;
+            font-size: 12px;
+            color: dimgray;
+        }
+
+        .mdiv {
+            width: 900px;
+            height: 300px;
+            background-color: #ffffff;
+            overflow: scroll;
+            margin-left: 80px;
+            scrollbar-face-color: #70807d;
+            scrollbar-arrow-color: #ffffff;
+            scrollbar-highlight-color: #ffffff;
+            scrollbar-3dlight-color: #70807d;
+            scrollbar-shadow-color: #ffffff;
+            scrollbar-darkshadow-color: #70807d;
+            scrollbar-track-color: #ffffff;
+        }
+
+        /* Team details End */
+
+    </style>
+
+    <!-- Template Stylesheet -->
+    <link href="bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- Header Area -->
+<div class="main-menu-area">
+    <nav class="main-navigation">
+        <ul class="menu" id="main-menu">
+            <li><a href="index.html">Introduction</a> </li>
+            <li class="current-menu-ancestor"><a href="api-python.html">Data Gathering</a></li>
+            <li><a href="data-cleaning.html">Data Cleaning</a></li>
+            <li><a href="exploring-data.html">Exploring Data</a></li>
+            <li><a href="clustering.html">Clustering</a></li>
+            <li><a href="arm-networking.html">ARM and Networking</a></li>
+            <li><a href="decision-trees.html">Decision Trees</a></li>
+            <li><a href="naïve-bayes.html">Naïve Bayes</a></li>
+            <li><a href="svm.html">SVM</a></li>
+            <li><a href="conclusions.html">Conclusions</a></li>
+        </ul>
+    </nav>
+</div>
+<!-- Header Area End-->
+
+<!-- Team Member Details -->
+<section class="team-member-details-wrapper">
+    <div class="container">
+        <div class="cvt-tabs-wrapper cvt-tab-layout-two">
+            <ul class="nav nav-tabs">
+                <li>
+                    <a class="active" data-toggle="tab" href="#tab-number-1">
+                        <span class="cvt-tab-menu-text">Keepa</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a data-toggle="tab" href="#tab-number-2">
+                        <span class="cvt-tab-menu-text">News</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a data-toggle="tab" href="#tab-number-3">
+                        <span class="cvt-tab-menu-text">Twitter</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a data-toggle="tab" href="#tab-number-4">
+                        <span class="cvt-tab-menu-text">Downloaded</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane active show" id="tab-number-1">
+                    <div class="cvt-tab-content-wrapper">
+                        <div class="tab-description">
+                            <h3 class="cvt-tab-title">Keepa API</h3>
+                            <p>All the python scripts and raw data in this section can be found at<a href="https://github.com/ljq0067/GU-ANLY501-Individual-Project-Profolio/tree/main/data%20gathering/API_python/Keepa">
+                                data_gather/API_python/keepa</a> folder on Github.</p>
+                            <p>Keepa.com is a websites provides a nice API of information about products or sellers on
+                                Amazon for different regions or periods.</p>
+                            <p>Firstly, please subscribe to the keepa API to get an access key.
+                                Then the historical price can be requested by providing the ASIN of product.
+                                The ASIN is a unique 10-characters identifier starts with 'B', which can be easily found
+                                in the Amazon url of the product.
+                                You can use the keepa API to request the ASIN for products on Amazon which sorted by
+                                sales ranking and then use the keepa API to request their information.</p>
+                            <p>Assume the date March 19, 2020, when California issued statewide the first Stay-at-Home
+                                order, is the start of Covid-19 period, the question is the changes for online shopping
+                                during this time.</p>
+                            <span class="cvt-tab-subtitle"># Product</span>
+                            <p>Keepa API tracks a lot of information about products on Amazon. The json response of ASIN
+                                sorted by sales rank is something like below.
+                                There is a key domain called 'asinList' and its value is what needed.</p>
+                            <img src="data gathering/API_Python/Keepa/asin.PNG">
+                            <p class="pict">Screenshot: Response JSON of ASIN from Keepa API</p>
+                            <p>According to the ASIN list above, we can request the detail information about these
+                                products based on the selected period(before Covid-19 and after) and domain locale(.com) for amazon.
+                                The format of response and meaning of each value is showed below:</p>
+                            <div class="mdiv">
+                                {<br>
+                                "productType": 0 for everything accessible, 1 for no marketplace/3rd party
+                                price data, 2 for no price data and sales rank accessible, 3 for no data accessible, 4
+                                for no current data available due to invalid or deprecated asin, 5 for product of a
+                                parent ASIN,<br>
+                                "asin": The ASIN of the product,<br>
+                                "domainId":  Product Amazon locale,<br>
+                                "title": Title of the product,<br>
+                                "trackingSince": The time started tracking this product,<br>
+                                "listedSince": The time the item was first listed on Amazon and 0 or -1 for
+                                not available,<br>
+                                "lastUpdate": The last time updated the information for this product,<br>
+                                "lastRatingUpdate": The last time updated the product rating and review count,<br>
+                                "lastPriceChange": The last time registered a price change (any price
+                                type),<br>
+                                "lastEbayUpdate": The last time updated the eBay prices for this product,<br>
+                                "imagesCSV": Amazon image names of the product in
+                                https://images-na.ssl-images-amazon.com/images/I/image name,<br>
+                                "rootCategory": Category node id of the product’s root category and 0 if no
+                                root category known. The id 9223372036854775807 denotes a blank category with the name
+                                “?”,<br>
+                                "categories": Array of Amazon category node ids this product is listed
+                                in,<br>
+                                "categoryTree": The category tree as an ordered array of objects
+                                containing category id and name,<br>
+                                "parentAsin": The ASIN of the parent product (if the product has
+                                variations),<br>
+                                "variationCSV": CSV list of up to 1800 variation ASINs of the product if
+                                available,,<br>
+                                "frequentlyBoughtTogether": One or two “Frequently Bought Together”
+                                ASINs,<br>
+                                "eanList": A list of EAN assigned to this product. The first index is the
+                                primary EAN,<br>
+                                "upcList": A list of UPC assigned to this product. The first index is the
+                                primary UPC,<br>
+                                "manufacturer": Name of the manufacturer,<br>
+                                "brand": An item’s brande,<br>
+                                "productGroup": The item’s productGroup,<br>
+                                "partNumber": The item’s partNumber,<br>
+                                "author": The item’s author,<br>
+                                "binding": The item’s binding. If the item is not a book it is usually the
+                                product category instead,<br>
+                                "numberOfItems": The number of items of this product. -1 if not available,<br>
+                                "numberOfPages": The number of pages of this product,<br>
+                                "publicationDate": The item’s publication date in one of the following three
+                                formats: YYYY or YYYYMM or YYYYMMDD,<br>
+                                "releaseDate": The item’s release date,<br>
+                                "languages": An item can have one or more languages and
+                                each language entry has a name and most also have a type,<br>
+                                "model": The item’s model,<br>
+                                "color": The item’s color,<br>
+                                "size": The item’s size,<br>
+                                "edition": The item’s edition,<br>
+                                "format": The item’s format,<br>
+                                "features": A list of up to 5 product features / bullet points,<br>
+                                "description": A description of the product,<br>
+                                "packageHeight": The package’s height in millimeter,<br>
+                                "packageLength": The package’s length in millimeter,<br>
+                                "packageWidth": The package’s width in millimeter,<br>
+                                "packageWeight": The package’s weight in gram,<br>
+                                "itemHeight": The item’s height in millimeter,<br>
+                                "itemLength": The item’s length in millimeter,<br>
+                                "itemWidth": The item’s width in millimeter,<br>
+                                "itemWeight": The item’s weight in gram,<br>
+                                "availabilityAmazon": 1 for no Amazon offer exists,
+                                0 for Amazon offer is in stock and shippable,
+                                1 for Amazon offer is currently not in stock but will be in the future (pre-order),
+                                2 for Amazon offer availability is “unknown”,
+                                3 for Amazon offer is currently not in stock but will be in the future (back-order),
+                                4 for Amazon offer shipping is delayed,<br>
+                                "availabilityAmazonDelay": If availabilityAmazon has the value 4 this
+                                field will provide the delay interval in hours,<br>
+                                "ebayListingIds": Contains the lowest priced matching eBay listing Ids,
+                                the first one is the listing id of the lowest priced listing in new condition, the
+                                second in used condition,<br>
+                                "isAdultProduct": Whether the item is considered to be for adults only or not,<br>
+                                "launchpad": Whether the item is listed in the launchpad category or not,<br>
+                                "audienceRating": The age for which the media is appropriate,<br>
+                                "newPriceIsMAP": Whether the lowest new price (either price type AMAZON or
+                                NEW) is restricted by MAP (Minimum Advertised Price) or not,<br>
+                                "isEligibleForTradeIn": Whether the product is eligible for trade-in or
+                                not,<br>
+                                "isEligibleForSuperSaverShipping": Whether the product’s buy box is eligible
+                                for free shipping or not,<br>
+                                "fbaFees": Providing the FBA pick & pack fees of this product,<br>
+                                "variations": The dimension attributes for variations of this
+                                product,<br>
+                                "coupon": The first entry is the discount of a one time coupon, the
+                                second is a subscribed and save coupon,<br>
+                                "promotions": Contains the type of promotion, the discounted
+                                price and the discount percent,<br>
+                                "stats": Statistics Contains the current and historical price and out of stock
+                                percentage of the time,<br>
+                                "salesRankReference": Category node id of the main sales rank. -1 if not
+                                available. -2 if listed in launchpad,<br>
+                                "salesRanks": An object containing sub-category rank histories,<br>
+                                "rentalDetails": Contains the rental details description of the rental buy box
+                                offer,<br>
+                                "rentalSellerId": Contains the seller id of the rental buy box offer,<br>
+                                "rentalPrices": This object contains the rental prices like
+                                initialPrice, shortExtnPrice, longExtnPrice and fullPrice,<br>
+                                "csv": Contains the history data for the product<br>
+                                }
+                            </div>
+                            <span class="cvt-tab-subtitle"># Category</span>
+                            <p>Additionally, using Keepa API, root categories can be requested to get information about
+                                category id, name, category-tree, the highest and lowest sales rank, number of products and
+                                context free category name,  that are listed in this category.</p>
+                            <img src="data gathering/API_Python/Keepa/category.PNG">
+                            <p class="pict">Screenshot: Response JSON of Category from Keepa API</p>
+                            <br>
+                            <span class="cvt-tab-subtitle"># Browsing</span>
+                            <p>Setting the Amazon locale is .com, the sort order is the lowest rank to highest and the
+                                time interval in which the product changed is 3 months, choosing to search for Amazon
+                                price history, the browsing information can be found by Keepa API.
+                                The response contains a deals field with the following content: ordered array of all
+                                deal objects, root category ids and names of deal products, and how many deal products
+                                in the respective root category are found.
+                                Note that if the root category of a product could not be determined it will be listed in
+                                the category with the name “?” with the id 9223372036854775807.</p>
+                            <img src="data gathering/API_Python/Keepa/browsing.PNG">
+                            <p class="pict">Screenshot: Response JSON of browsing information from Keepa API</p>
+                            <span class="cvt-tab-subtitle"># Seller</span>
+                            <p>For sellers in Amazon, the top sellers for Amazon locale(.com) can be searched and their
+                                id can be gotten from Keepa API like this.</p>
+                            <img src="data gathering/API_Python/Keepa/topseller.PNG">
+                            <p class="pict">Screenshot: Response JSON of top sellers from Keepa API</p>
+                            <p>Through the seller id, the detail information can also be requested. The format of
+                                response is showed like below for each seller. </p>
+                            <div class="mdiv">
+                                {<br>
+                                "domainId": ID of the Amazon locale,<br>
+                                "trackingSince": The time started tracking this seller,<br>
+                                "lastUpdate": The time of last update of this seller, <br>
+                                "sellerId": ID of sellers,<br>
+                                "sellerName": Name of sellers,<br>
+                                "isScammer": Whether our system identified that this seller attempts to scam users or not,<br>
+                                "shipsFromChina": Whether this seller ships from China or not,<br>
+                                "hasFBA": Fulfillment by Amazon(FBA) or not,<br>
+                                "totalStorefrontAsins": The number of storefront ASINs if available and the last update of that metric,<br>
+                                "csv": The merchant’s rating in percent at present and in history,<br>
+                                "asinList": Storefront ASINs, sorted by freshest first,<br>
+                                "asinListLastSeen": The last time (in Keepa Time minutes) we were able to verify each ASIN in the asinList field,<br>
+                                "sellerCategoryStatistics": Contains the category id, the number of
+                                products this merchant sells in this category, the 30-day average sales rank of these
+                                products, and how many of these products have an Amazon offer,<br>
+                                "sellerBrandStatistics": Contains the brand, the number of products this
+                                merchant sells with this brand, the 30-day average sales rank of these products, and how
+                                many of these products have an Amazon offer,<br>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="tab-number-2">
+                    <div class="cvt-tab-content-wrapper">
+                        <div class="tab-description">
+                            <h3 class="cvt-tab-title">Data From News API</h3>
+                            <p><a href="https://newsapi.org/docs">News API </a>is used to search about reviews and comments on online shopping.</p>
+                            <span class="cvt-tab-subtitle"># News API Using Python</span>
+                            <p>With keywords online shopping, The articles about it can be seen through responses from News API.</p>
+                            <img src="data gathering/API_Python/News/News_Python_code.PNG">
+                            <p class="pict">Screenshot: R code for News API</p>
+                            <p>Below is part of the data that requested from News API and the published date, author and title can be seen.</p>
+                            <img src="data gathering/API_Python/News/News_Python_Amazon.PNG">
+                            <p class="pict">Screenshot: Response TXT of articles about Amazon</p>
+
+                            <span class="cvt-tab-subtitle"># News API Using R</span>
+                            <p>With keywords online shopping, The articles about it can be seen through responses from News API.</p>
+                            <img src="data gathering/API_R/News/API_News_Rcode.PNG">
+                            <p class="pict">Screenshot: R code for News API</p>
+                            <p>Below is part of the data that requested from News API and the published date, author and title can be seen.</p>
+                            <img src="data gathering/API_R/News/API_News_Rdata.PNG">
+                            <p class="pict">Screenshot: Response CSV of articles about online shopping</p>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="tab-number-3">
+                    <div class="cvt-tab-content-wrapper">
+                        <div class="tab-description">
+                            <h3 class="cvt-tab-title">Data From Twitter API</h3>
+                            <span class="cvt-tab-subtitle"># Twitter API with R</span>
+                            <p>With Twitter API, some data about reviews on online shopping or Amazon are collected. The code is showed
+                                <a href="data%20gathering/API_R/Twitter/API_twitter.html">here</a>. And a screenshot of data is presented below.</p>
+                            <img src="data gathering/API_R/Twitter/twitter_data.PNG">
+                            <p class="pict">Screenshot: Response CSV of data from Twitter API</p>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="tab-number-4">
+                    <div class="cvt-tab-content-wrapper">
+                        <div class="tab-description">
+                            <h3 class="cvt-tab-title">Data Downloaded</h3>
+                            Those data is found from a <a href="https://nijianmo.github.io/amazon/index.html">website</a> that shows research about Amazon Reviews Data.
+                            <p><strong>Cite:</strong> Ni, Jianmo, Jiacheng Li, and Julian McAuley. "Justifying recommendations using distantly-labeled reviews and fine-grained aspects."
+                                Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP). 2019.</p>
+                            <span class="cvt-tab-subtitle"># Data Example</span>
+                            <p>Part of data can be showed like the image below.</p>
+                            <img src="data gathering/Download_data/data_downloaded.PNG">
+                            <p class="pict">Screenshot: Downloaded JSON file about Amazon Reviews</p>
+                            <span class="cvt-tab-subtitle"># Data Information</span>
+                            <p>The format about downloaded data and meanings of content </p>
+                            <div class="mdiv">
+                                {<br>
+                                "reviewerID": ID of the reviewer,<br>
+                                "asin": ID of the product,<br>
+                                "reviewerName": Name of reviewer,<br>
+                                "vote": Helpful votes of the reviewer,<br>
+                                "style": a dictionary of the product metadata,<br>
+                                "reviewText": Text of the review,<br>
+                                "overall": Rating of the product,<br>
+                                "summary": Summary of the review,<br>
+                                "unixReviewTime": Time of the review(unix time),<br>
+                                "reviewTime": Time of the review(raw),<br>
+                                "image": Images that users post after they have received the product
+                                }
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Team Member Details End -->
+
+
+<!-- Template Scripts -->
+<script src="jquery-3.5.1.min.js"></script>
+<script src="bootstrap.min.js"></script>
+
+</body>
+</html>

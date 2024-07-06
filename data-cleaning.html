@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- META DATA -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Jieqian Liu">
+
+    <!-- Title -->
+    <title>ANLY501 Project</title>
+
+    <style>
+        img {
+            max-width: 80%;
+            height: auto;
+            margin-left: 250px;
+        }
+        /* Main Menu CSS */
+        .main-menu-area {
+            background: #f2f8ec;
+        }
+        .main-navigation ul li {
+            display: inline-block;
+            position: relative;
+        }
+        .main-navigation ul li a {
+            padding: 20px 20px;
+            display: block;
+            text-transform: capitalize;
+            color: #113417;
+            font-size: 18px;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+            line-height: 1;
+        }
+        .main-navigation ul li a:before {
+            position: absolute;
+            content: '';
+            height: 36px;
+            width: 100%;
+            background-color: #81b60c;
+            left: 0;
+            border-radius: 50px;
+            z-index: -1;
+            top: 50%;
+            margin-top: -17px;
+            opacity: 0;
+            visibility: hidden;
+            transition: .3s;
+        }
+        .main-navigation ul ul li a:before {
+            display: none;
+        }
+        .main-navigation ul ul li a,
+        .main-navigation ul li a:hover,
+        .main-navigation ul li.current-menu-ancestor > a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+        .main-navigation ul ul li a:hover,
+        .main-navigation ul ul li.current-menu-ancestor > a {
+            background-color: #123416;
+        }
+        .main-navigation ul li a:hover:before,
+        .main-navigation ul li.current-menu-ancestor > a:before {
+            opacity: 1;
+            visibility: visible;
+        }
+        /* Main Menu CSS End*/
+
+        /* Submenu / Dropdown Menu CSS */
+        .main-navigation ul li ul {
+            position: absolute;
+            width: 250px;
+            left: 0;
+            top: 58px;
+            z-index: 2;
+            -webkit-transition: .3s;
+            transition: .3s;
+            visibility: hidden;
+            opacity: 0;
+            background-color: #81b60c;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .main-navigation ul li:hover > ul {
+            opacity: 1;
+            visibility: visible;
+        }
+        .main-navigation ul li ul li a {
+            padding: 14px 20px;
+            line-height: 26px;
+        }
+        .main-navigation ul li ul li {
+            display: block;
+            text-align: left;
+        }
+        .main-navigation ul li ul ul {
+            left: 250px;
+            top: 0;
+        }
+        .main-navigation ul li ul li {
+            border-bottom: 1px solid #e5e5e5;
+        }
+        .main-navigation ul li ul li:last-child {
+            border-bottom: 0;
+        }
+        /* Submenu / Dropdown Menu CSS End */
+
+                /* Tab Layout Two */
+        .cvt-tabs-wrapper.cvt-tab-layout-two {
+            background-color: #f4f5ef;
+            padding: 10px;
+        }
+
+        .cvt-tab-layout-two .nav li a {
+            display: inline-flex;
+            align-items: center;
+            background-color: #ebebe7;
+            margin-right: 10px;
+            color: #123417;
+            font-size: 28px;
+            font-weight: 700;
+            padding: 15px 23px;
+            margin-bottom: 10px;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .cvt-tab-layout-two .nav li a.active,
+        .cvt-tab-layout-two .nav li:hover a {
+            background-color: #123417;
+            color: #ffffff;
+        }
+
+        .cvt-tab-layout-two .tab-content {
+            padding: 25px 30px 45px 30px;
+        }
+
+        .cvt-tab-layout-two .cvt-tab-title {
+            font-size: 36px;
+            line-height: 1.3;
+            margin-bottom: 30px;
+        }
+
+        .cvt-tab-layout-two .cvt-tab-content-wrapper strong {
+            margin-top: 15px;
+        }
+
+        /* Tab Layout Two End */
+
+        /* Team details */
+        .team-member-details-wrapper .cvt-tab-layout-two .tab-content {
+            padding: 0;
+        }
+
+        .team-member-details-wrapper .cvt-tab-layout-two .nav li a {
+            padding: 5px 40px;
+            font-size: 25px;
+            background-color: #ffffff;
+        }
+
+        .team-member-details-wrapper .cvt-tab-layout-two .nav li a.active,
+        .team-member-details-wrapper .cvt-tab-layout-two .nav li:hover a {
+            background-color: #81b60c;
+        }
+
+        .cvt-tab-layout-two .cvt-tab-title {
+            margin-bottom: 10px;
+        }
+
+        .team-member-details-wrapper .cvt-tab-subtitle {
+            color: #81b60c;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            font-size: 17px;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .team-member-details-wrapper .cvt-tab-subtitle a {
+            color: #81b60c;
+        }
+
+        .pict{
+            margin-top: 5px;
+            margin-left: 350px;
+            font-size: 12px;
+            color: dimgray;
+        }
+    </style>
+
+    <!-- Template Stylesheet -->
+    <link rel="stylesheet" href="bootstrap.min.css">
+
+</head>
+
+<body>
+<!-- Header Area -->
+
+<div class="main-menu-area">
+    <nav class="main-navigation">
+        <ul id="main-menu" class="menu">
+            <li><a href="index.html">Introduction</a> </li>
+            <li><a href="data-gathering.html">Data Gathering</a></li>
+            <li class="current-menu-ancestor"><a href="data-cleaning.html">Data Cleaning</a></li>
+            <li><a href="exploring-data.html">Exploring Data</a></li>
+            <li><a href="clustering.html">Clustering</a></li>
+            <li><a href="arm-networking.html">ARM and Networking</a></li>
+            <li><a href="decision-trees.html">Decision Trees</a></li>
+            <li><a href="naïve-bayes.html">Naïve Bayes</a></li>
+            <li><a href="svm.html">SVM</a></li>
+            <li><a href="conclusions.html">Conclusions</a></li>
+        </ul>
+    </nav>
+</div>
+<!-- Header Area End-->
+
+
+<!-- Team Member Details -->
+<section class="team-member-details-wrapper">
+    <div class="container">
+        <div class="cvt-tabs-wrapper cvt-tab-layout-two">
+            <ul class="nav nav-tabs">
+                <li>
+                    <a class="active" data-toggle="tab" href="#tab-number-1">
+                        <span class="cvt-tab-menu-text">Clean Data For R</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a data-toggle="tab" href="#tab-number-2">
+                        <span class="cvt-tab-menu-text">Clean Data For Python</span>
+                    </a>
+                </li>
+
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane active show" id="tab-number-1">
+                    <div class="cvt-tab-content-wrapper">
+                        <div class="tab-description">
+                            <h3 class="cvt-tab-title">Record data cleaning with R</h3>
+                            <span class="cvt-tab-subtitle"># Twitter data cleaning and plot</span>
+                            <p>Using R to clean the record twitter data(<a href="data%20gathering/API_R/Twitter/twitter.csv">raw data</a>) and plot. With knit the Rmd document, the whole processing is showed in the website(<a href="data%20cleaning/cleaning-record-data.html">Link</a>).</p>
+                            <p>The result is two csv files: <a href="data%20cleaning/twitter_clean.csv">cleaned data</a> and <a href="data%20cleaning/twitter_clean_Norm_Numeric.csv">normalized data</a>.</p>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="tab-number-2">
+                    <div class="cvt-tab-content-wrapper">
+                        <div class="tab-description">
+                            <h3 class="cvt-tab-title">Text data cleaning with Python</h3>
+                            <span class="cvt-tab-subtitle"># Using CountVectorizer for CSV data</span>
+                            <p>Using python to clean the text data with CountVectorizer. The code is showed
+                                <a href="data cleaning/python_cleaning_text%20data.py.html">here</a>. And a screenshot of  statistical words in descending order is presented below.</p>
+                            <img src="data cleaning/text_python.PNG">
+                            <p class="pict">Screenshot: Plot Words Using CountVectorizer </p>
+                            <span class="cvt-tab-subtitle"># Using Wordcloud for TXT data</span>
+                            <p>Using python to clean the text data with WordCloud. The code is showed
+                                <a href="data cleaning/clean%20txt%20data.py.html">here</a>. And the picture of wordcloud is presented below.</p>
+                            <img src="data cleaning/wordcloud.png">
+                            <p class="pict">Screenshot: Plot Words Using WordCloud </p>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Team Member Details End -->
+
+<!-- Template Scripts -->
+<script src="jquery-3.5.1.min.js"></script>
+<script src="bootstrap.min.js"></script>
+</body>
+</html>

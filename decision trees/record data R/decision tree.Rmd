@@ -1,0 +1,78 @@
+---
+title: "decision tree"
+author: "Jieqian Liu"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(rpart)
+library(rpart.plot)
+library(vip)
+library(rattle)
+library(tidyverse)
+library(ggthemes)
+```
+
+
+```{r}
+# read data and drop columns
+data = read.csv("price.csv")
+data$type = factor(data$type)
+data$brand = factor(data$brand)
+
+fit.data = data[-c(1)]
+```
+
+```{r}
+#Decision Trees 
+
+#1st one 
+DT <- rpart(fit.data$brand ~ time0+time1+time2+time3+time4+time5+time6+time7+time8+time9, data = fit.data, method="class")
+## VIS
+plotcp(DT)
+png("dt_1.png", width=1100, height=900)
+fancyRpartPlot(DT)
+
+## Confusion Matrix
+DT_Prediction= predict(DT, type="class")
+table(DT_Prediction)
+
+barplot(DT$variable.importance, main = "Variable Importance Tree 1", las=2, cex.names=.4)
+```
+
+```{r}
+#2nd one 
+DT2 <- rpart(fit.data$brand ~ time0+time1+time2+time3+time4+time5+time6+time7+time8+time9, cp = 0.02, data = fit.data, method="class")
+## VIS
+plotcp(DT2)
+# png("dt_2.png", width=1100, height=900)
+fancyRpartPlot(DT2)
+
+## Confusion Matrix
+DT2_Prediction= predict(DT2, fit.data, type="class")
+table(DT2_Prediction)
+
+barplot(DT2$variable.importance, main = "Variable Importance Tree 2", las=2, cex.names=.4)
+```
+
+```{r}
+#3rd one 
+DT3 <- rpart(fit.data$type ~ time0+time1+time2+time3+time4+time5+time6+time7+time8+time9, cp = 0.02, data = fit.data, method="class")
+## VIS
+plotcp(DT3)
+# png("dt_3.png", width=1100, height=900)
+fancyRpartPlot(DT3)
+
+## Confusion Matrix
+DT3_Prediction= predict(DT3, type="class")
+table(DT3_Prediction)
+
+barplot(DT3$variable.importance, main = "Variable Importance Tree 3", las=2, cex.names=.4)
+```
