@@ -1,0 +1,48 @@
+---
+title: "D6"
+author: "Jack Piccione"
+date: "11/10/2021"
+output: html_document
+---
+
+```{r}
+library(e1071)
+```
+
+```{r}
+df <- read.csv("Oscars_Classifer")
+str(df)
+df$nominated <- as.factor(df$nominated)
+#train/test
+every5_indexes<-seq(1,nrow(df),5)
+DF_Test_Student<-df[every5_indexes, ]
+DF_Train_Student<-df[-every5_indexes, ]
+
+## Copy the Labels
+DF_Test_Student_Labels <- DF_Test_Student$nominated
+## Remove the labels
+DF_Test_Student_NL<-DF_Test_Student[ , -which(names(DF_Test_Student) %in% c("nominated"))]
+
+#(DF_Test_Student_NL)
+## Train...--------------------------------
+## Copy the Labels
+DF_Train_Student_Labels <- DF_Train_Student$nominated
+## Remove the labels
+DF_Train_Student_NL<-DF_Train_Student[ , -which(names(DF_Train_Student) %in% c("nominated"))]
+
+```
+```{r}
+(NB_e1071_2<-naiveBayes(DF_Train_Student_NL, 
+                       DF_Train_Student_Labels, 
+                       laplace = 1))
+
+NB_e1071_Pred <- predict(NB_e1071_2, DF_Test_Student_NL)
+Ptable<-table(NB_e1071_Pred,DF_Test_Student_Labels)
+accuracy_Test <- sum(diag(Ptable)) / sum(Ptable)
+accuracy_Test
+```
+
+
+
+
+

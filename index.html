@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- META DATA -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Jieqian Liu">
+
+    <!-- Title -->
+    <title>ANLY501 Project</title>
+
+    <style>
+
+        /* Main Menu CSS */
+        .main-menu-area {
+            background: #f2f8ec;
+        }
+        .main-navigation ul li {
+            display: inline-block;
+            position: relative;
+        }
+        .main-navigation ul li a {
+            padding: 20px 20px;
+            display: block;
+            text-transform: capitalize;
+            color: #113417;
+            font-size: 18px;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+            line-height: 1;
+        }
+        .main-navigation ul li a:before {
+            position: absolute;
+            content: '';
+            height: 36px;
+            width: 100%;
+            background-color: #81b60c;
+            left: 0;
+            border-radius: 50px;
+            z-index: -1;
+            top: 50%;
+            margin-top: -17px;
+            opacity: 0;
+            visibility: hidden;
+            transition: .3s;
+        }
+        .main-navigation ul ul li a:before {
+            display: none;
+        }
+        .main-navigation ul ul li a,
+        .main-navigation ul li a:hover,
+        .main-navigation ul li.current-menu-ancestor > a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+        .main-navigation ul ul li a:hover,
+        .main-navigation ul ul li.current-menu-ancestor > a {
+            background-color: #123416;
+        }
+        .main-navigation ul li a:hover:before,
+        .main-navigation ul li.current-menu-ancestor > a:before {
+            opacity: 1;
+            visibility: visible;
+        }
+        /* Main Menu CSS End*/
+
+        /* Submenu / Dropdown Menu CSS */
+        .main-navigation ul li ul {
+            position: absolute;
+            width: 250px;
+            left: 0;
+            top: 58px;
+            z-index: 2;
+            -webkit-transition: .3s;
+            transition: .3s;
+            visibility: hidden;
+            opacity: 0;
+            background-color: #81b60c;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .main-navigation ul li:hover > ul {
+            opacity: 1;
+            visibility: visible;
+        }
+        .main-navigation ul li ul li a {
+            padding: 14px 20px;
+            line-height: 26px;
+        }
+        .main-navigation ul li ul li {
+            display: block;
+            text-align: left;
+        }
+        .main-navigation ul li ul ul {
+            left: 250px;
+            top: 0;
+        }
+        .main-navigation ul li ul li {
+            border-bottom: 1px solid #e5e5e5;
+        }
+        .main-navigation ul li ul li:last-child {
+            border-bottom: 0;
+        }
+        /* Submenu / Dropdown Menu CSS End */
+
+        /*About Us & Tab Css */
+        .cvt-tabs-wrapper.tab-layout-one ul.nav a {
+            min-height: 200px;
+            width: 200px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f2f6ef;
+            flex-direction: column;
+            padding: 25px;
+            text-decoration: none;
+        }
+        .cvt-tabs-wrapper.tab-layout-one .nav-tabs {
+            border-bottom: 0;
+            width: 200px;
+            float: left;
+        }
+        .cvt-tabs-wrapper.tab-layout-one .nav-tabs li {
+            margin-bottom: 25px;
+        }
+        .tab-layout-one .cvt-tab-menu-text {
+            font-size: 30px;
+            font-weight: 700;
+            display: block;
+            color: #113417;
+            text-align: center;
+            line-height: 35px;
+            margin-top: 20px;
+        }
+        .cvt-tabs-wrapper.tab-layout-one ul.nav a.active,
+        .cvt-tabs-wrapper.tab-layout-one ul.nav a:hover {
+            background-color: #113417;
+        }
+        .cvt-tabs-wrapper.tab-layout-one ul.nav a.active .cvt-tab-menu-text,
+        .cvt-tabs-wrapper.tab-layout-one ul.nav a:hover .cvt-tab-menu-text {
+            color: #ffffff;
+        }
+        .tab-layout-one .tab-content {
+            padding-left: 300px;
+        }
+        .tab-layout-one .cvt-tab-content-wrapper .cvt-tab-subtitle {
+            text-transform: uppercase;
+            font-weight: 700;
+            color: #80b511;
+            letter-spacing: .5px;
+            display: block;
+        }
+        .tab-layout-one .cvt-tab-content-wrapper .cvt-tab-title {
+            font-size: 50px;
+            line-height: 62px;
+            margin: 20px 0 35px;
+        }
+        .cvt-tab-content-wrapper strong {
+            color: #123417;
+            display: block;
+            margin-top: 25px;
+        }
+
+    </style>
+
+    <!-- Template Stylesheet -->
+    <link rel="stylesheet" href="bootstrap.min.css">
+
+</head>
+
+<body>
+<!-- Header Area -->
+
+<div class="main-menu-area">
+    <nav class="main-navigation">
+        <ul id="main-menu" class="menu">
+            <li class="current-menu-ancestor"><a href="index.html">Introduction</a> </li>
+            <li><a href="data-gathering.html">Data Gathering</a></li>
+            <li><a href="data-cleaning.html">Data Cleaning</a></li>
+            <li><a href="exploring-data.html">Exploring Data</a></li>
+            <li><a href="clustering.html">Clustering</a></li>
+            <li><a href="arm-networking.html">ARM and Networking</a></li>
+            <li><a href="decision-trees.html">Decision Trees</a></li>
+            <li><a href="naïve-bayes.html">Naïve Bayes</a></li>
+            <li><a href="svm.html">SVM</a></li>
+            <li><a href="conclusions.html">Conclusions</a></li>
+        </ul>
+    </nav>
+</div>
+<!-- Header Area End-->
+
+<!-- About Us Section-->
+<section class="about-us-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="cvt-tabs-wrapper tab-layout-one">
+                    <ul class="nav nav-tabs">
+                        <li>
+                            <a data-toggle="tab" href="#tab-number-1" class="active">
+                                <span class="cvt-tab-menu-text">Background</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a data-toggle="tab" href="#tab-number-2">
+                                <span class="cvt-tab-menu-text cvt-transition">Questions</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div id="tab-number-1" class="tab-pane active show">
+                            <div class="cvt-tab-content-wrapper">
+                                <span class="cvt-tab-subtitle"># What is My Topic</span>
+                                <div class="tab-description">
+                                    <h3 class="cvt-tab-title">Amazon Online Shopping</h3>
+
+                                    <p>This project is to analyze data about online shopping on Amazon. Online shopping has developed rapidly in recent years as it becomes part of daily life for people.
+                                        Compared with shopping in the store, online shopping provides various products in different catafories for people to choose and offers much more conviniece shopping experience with lower prices.
+                                        Online shopping sales reach a new height every year that means there are more and more people tend to use online shopping to buy things they need.</p>
+                                        <p>What is more, because of Covid-19, people work online and hardly go outside for shopping in order to avoid crowd.
+                                    Therefore, people choose to buy almost everything they need through online shopping websites or apps like Amazon because of the convenience, abundance, and safety.</p>
+                                    <p>It is interesting to think about the things bought online are good or suitable and how to choose products or compare the similiar product for different stores.</p>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="tab-number-2" class="tab-pane">
+                            <div class="cvt-tab-content-wrapper">
+                                <span class="cvt-tab-subtitle"># What is My Question</span>
+
+                                <div class="tab-description">
+                                    <h3 class="cvt-tab-title">Amazon Online Shopping</h3>
+
+                                    <strong>01. What can influence the rank of products when searching?</strong>
+                                    <p>Like features of products, booking/searching history of customers,  any bias Amazon has towards their own brands. Amazon sometimes has different prices for the same product for different users searching for it, and I'm wondering if Amazon prices it differently for different users.</p>
+                                    <strong>02. How do Amazon choose products for prime and Amazon's Choice label?</strong>
+                                    <p>How Amazon calculated the correlation of ratings, sales and rankings?</p>
+                                    <strong>03. What does Amazon do to protect customers from cheating?</strong>
+                                    <strong>04. How do customer reviews affect sales, especially the 5 stars or 1 star?</strong>
+                                    <strong>05. What does the after-sale service do to improve?</strong>
+                                    <strong>06. How the price of shipping fee can affect the domestic and international users？</strong>
+                                    <strong>07. How different will the front page and the search results be shown each time among people?</strong>
+                                    <strong>08. What is the difference between people of different ages when shopping online?</strong>
+                                    <strong>09. What is the difference in online shopping for people of different genders?</strong>
+                                    <strong>10. How different are people shopping online in different regions?</strong>
+                                    <strong>11. During Covid-19, how are the e-commerce sales affected around the world?(price, shipping, stock...)</strong>
+                                    <br>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- About Us Section End -->
+
+<!-- Template Scripts -->
+<script src="jquery-3.5.1.min.js"></script>
+<script src="bootstrap.min.js"></script>
+</body>
+</html>

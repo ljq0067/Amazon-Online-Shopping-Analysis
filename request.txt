@@ -1,0 +1,2 @@
+asid, browse/purchase history, brands, prices, category, item name, ratings, sales, rankings,
+shipping price/time, customer, age, gender, review/refund, address/region, stock through time change, Prime or not

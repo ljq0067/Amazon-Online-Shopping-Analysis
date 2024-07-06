@@ -1,0 +1,18 @@
+---
+title: "conclusion"
+author: "Jieqian Liu"
+date: "12/4/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+decision_tree = c(0.68, 0.69, 0.49, 0.48)
+naive_bayes = c(0.75, 0.66)
+svm = c(0.58, 0.82, 0.58)
+boxplot(decision_tree, naive_bayes, svm, main='Model Accuracies', xlab='Model', ylab='Accuracy', 
+        names = c("decision_tree", "naive_bayes", "svm"), col = c("lightblue", "lightyellow", "lightgreen"))
+```

@@ -1,0 +1,144 @@
+---
+title: "SVM"
+author: "Jieqian Liu"
+output: 
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(ggthemes)
+library(psych)
+library(caTools)
+library(e1071)
+library(tidyverse)
+library(caret)
+library(cvms)
+```
+
+```{r}
+set.seed(123)
+
+data <- read.csv("price_label.csv")
+head(data)
+data[is.na(data)]<-0
+data$Label <- as.factor(data$Label)
+data$brand <- as.factor(data$brand)
+data$type <- as.factor(data$type)
+
+Size <- (as.integer(nrow(data)/4))
+SAMPLE <- sample(nrow(data), Size, replace = FALSE)
+
+test<-data[SAMPLE, ]
+train<-data[-SAMPLE, ]
+
+train <- train %>% select(-c(asin))
+
+y.train <- train$Label
+y.test <- test$Label
+
+X.train <- train %>% select(-c(Label))
+X.test <- test %>% select(-c(asin, Label))
+```
+
+```{r}
+SVM_fit_P <- svm(Label~., data=train, 
+               kernel="polynomial", cost=.1, 
+               scale=FALSE)
+print(SVM_fit_P)
+
+(pred_P <- predict(SVM_fit_P, X.train))
+(Ptable <- table(pred_P, y.train))
+
+(MR_R <- 1 - sum(diag(Ptable))/sum(Ptable))
+
+(cm1 <- caret::confusionMatrix(pred_P, y.train, positive="true"))
+cmDF1 <- as.data.frame(cm1$table)
+plot_confusion_matrix(cmDF1, 
+                      target_col = "Reference", 
+                      prediction_col = "Prediction",
+                      counts_col = "Freq",
+                      add_row_percentages = FALSE,
+                      add_col_percentages = FALSE,
+                      rm_zero_percentages = FALSE,
+                      rm_zero_text = FALSE,
+                      add_zero_shading = TRUE,
+                      counts_on_top = TRUE)
+```
+
+```{r}
+SVM_fit_P2 <- svm(Label~., data=train, 
+               kernel="radial", cost=.1, 
+               scale=FALSE)
+print(SVM_fit_P2)
+
+(pred_P2 <- predict(SVM_fit_P2, X.train, type="class"))
+(Ptable2 <- table(pred_P2, y.train))
+
+(cm2 <- caret::confusionMatrix(pred_P2, y.train, positive="true"))
+cmDF2 <- as.data.frame(cm2$table)
+plot_confusion_matrix(cmDF2, 
+                      target_col = "Reference", 
+                      prediction_col = "Prediction",
+                      counts_col = "Freq",
+                      add_row_percentages = FALSE,
+                      add_col_percentages = FALSE,
+                      rm_zero_percentages = FALSE,
+                      rm_zero_text = FALSE,
+                      add_zero_shading = TRUE,
+                      counts_on_top = TRUE)
+```
+
+```{r}
+SVM_fit_P3 <- svm(Label~., data=train, 
+               kernel="linear", cost=.1, 
+               scale=FALSE)
+print(SVM_fit_P3)
+
+(pred_P3 <- predict(SVM_fit_P3, X.train, type="class"))
+(Ptable3 <- table(pred_P3, y.train))
+
+(cm3 <- caret::confusionMatrix(pred_P3, y.train, positive="true"))
+cmDF3 <- as.data.frame(cm3$table)
+plot_confusion_matrix(cmDF3, 
+                      target_col = "Reference", 
+                      prediction_col = "Prediction",
+                      counts_col = "Freq",
+                      add_row_percentages = FALSE,
+                      add_col_percentages = FALSE,
+                      rm_zero_percentages = FALSE,
+                      rm_zero_text = FALSE,
+                      add_zero_shading = TRUE,
+                      counts_on_top = TRUE)
+```
+
+```{r}
+SVM_fit_P4 <- svm(Label~., data=train, 
+               kernel="sigmoid", cost=.5, 
+               scale=FALSE)
+print(SVM_fit_P4)
+
+(pred_P4 <- predict(SVM_fit_P4, X.train, type="class"))
+(Ptable4 <- table(pred_P4, y.train))
+
+(cm4 <- caret::confusionMatrix(pred_P4, y.train, positive="true"))
+cmDF4 <- as.data.frame(cm4$table)
+plot_confusion_matrix(cmDF4, 
+                      target_col = "Reference", 
+                      prediction_col = "Prediction",
+                      counts_col = "Freq",
+                      add_row_percentages = FALSE,
+                      add_col_percentages = FALSE,
+                      rm_zero_percentages = FALSE,
+                      rm_zero_text = FALSE,
+                      add_zero_shading = TRUE,
+                      counts_on_top = TRUE)
+```

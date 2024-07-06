@@ -1,0 +1,96 @@
+---
+title: "naive bayes"
+author: "Jieqian Liu"
+output: 
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(ggthemes)
+library(psych)
+library(caTools)
+library(e1071)
+library(tidyverse)
+library(caret)
+library(cvms)
+```
+
+```{r}
+set.seed(123)
+
+data <- read.csv("price_label.csv")
+head(data)
+data[is.na(data)]<-0
+data$Label <- as.factor(data$Label)
+data$brand <- as.factor(data$brand)
+data$type <- as.factor(data$type)
+
+Size <- (as.integer(nrow(data)/4))
+SAMPLE <- sample(nrow(data), Size, replace = FALSE)
+
+test<-data[SAMPLE, ]
+train<-data[-SAMPLE, ]
+
+y.train <- train$Label
+y.test <- test$Label
+
+X.train <- train %>% select(-c(asin, Label))
+X.test <- test %>% select(-c(asin, Label))
+```
+
+```{r}
+nb.model <- naiveBayes(X.train, y.train)
+y.pred.nb <- predict(nb.model, X.train)
+y.train <- as.factor(y.train)
+(confMat <- table(y.pred.nb, y.train))
+
+# Calculate accuracy
+(accuracy <- (confMat[1, 1] + confMat[2, 2] + confMat[3, 3])/sum(colSums(confMat)))
+
+# Plot Confusion Matrix
+(cm1 <- caret::confusionMatrix(y.pred.nb, y.train, positive="true"))
+cmDF1 <- as.data.frame(cm1$table)
+plot_confusion_matrix(cmDF1, 
+                      target_col = "Reference", 
+                      prediction_col = "Prediction",
+                      counts_col = "Freq",
+                      add_row_percentages = FALSE,
+                      add_col_percentages = FALSE,
+                      rm_zero_percentages = FALSE,
+                      rm_zero_text = FALSE,
+                      add_zero_shading = TRUE,
+                      counts_on_top = TRUE)
+
+ggsave("nb_train.png", height = 6, width = 6)
+
+test$Label = predict(nb.model, X.test)
+```
+
+```{r}
+model = train(X.train,y.train,'nb')
+model$results
+
+Predict <- predict(model, X.test)
+table(Predict, y.test)
+X <- varImp(model)
+plot(X)
+```
+
+```{r}
+ggplot(test) +
+  geom_bar(aes(x=brand, fill=Label)) +
+  theme_economist_white() +
+  labs(title = "brand1 Count Plot over price_IMPACT",
+       subtitle = "Predicted by Naive Bayes",
+       x = "brand")
+ggsave("nb_brand.png", height = 6, width = 8)
+```
