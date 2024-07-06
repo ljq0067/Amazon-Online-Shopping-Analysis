@@ -1,0 +1,60 @@
+<html>
+<head>
+<title>API_News.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #808080;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #cc7832;}
+.s3 { color: #6a8759;}
+.s4 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+API_News.py</font>
+</center></td></tr></table>
+<pre><span class="s0"># API Exercise with Python</span>
+<span class="s2">import </span><span class="s1">requests</span>
+<span class="s2">import </span><span class="s1">json</span>
+<span class="s2">import </span><span class="s1">csv</span>
+
+<span class="s0"># use NewsAPI to find news related to Amazon</span>
+<span class="s1">BaseURL1 = </span><span class="s3">&quot;https://newsapi.org/v2/everything?q=Amazon&amp;apiKey=237d79255be746ca8b2a73cddddac68f&quot;</span>
+<span class="s1">URLPost1 = {</span><span class="s3">' API_KEY '</span><span class="s1">: </span><span class="s3">' 237d79255be746ca8b2a73cddddac68f '</span><span class="s2">,</span>
+            <span class="s3">' sortBy '</span><span class="s1">: </span><span class="s3">' top '</span><span class="s2">,</span>
+            <span class="s3">' format '</span><span class="s1">: </span><span class="s3">' application/json '</span><span class="s1">}</span>
+<span class="s0"># print(URLPost1)</span>
+<span class="s1">response1 = requests.get(BaseURL1</span><span class="s2">, </span><span class="s1">URLPost1)</span>
+<span class="s0"># print(response1)</span>
+<span class="s1">jsontxt = response1.json()</span>
+
+<span class="s0"># use json</span>
+<span class="s1">t1 = requests.get(BaseURL1</span><span class="s2">, </span><span class="s1">URLPost1)</span>
+<span class="s1">json_data1 = json.loads(t1.text)</span>
+<span class="s1">json.dumps(json_data1</span><span class="s2">, </span><span class="s1">indent=</span><span class="s4">4</span><span class="s1">)</span>
+
+<span class="s0"># write in files</span>
+<span class="s1">f = open(</span><span class="s3">' amazon-news.txt '</span><span class="s2">, </span><span class="s3">'w'</span><span class="s2">, </span><span class="s1">newline=</span><span class="s3">''</span><span class="s1">)</span>
+<span class="s1">writer = csv.writer(f)</span>
+<span class="s1">header = [</span><span class="s3">' published_at '</span><span class="s2">, </span><span class="s3">' author '</span><span class="s2">, </span><span class="s3">' title '</span><span class="s1">]</span>
+<span class="s1">writer.writerow(header)</span>
+
+<span class="s0"># select needed data</span>
+<span class="s2">for </span><span class="s1">series </span><span class="s2">in </span><span class="s1">json_data1[</span><span class="s3">&quot;articles&quot;</span><span class="s1">]:</span>
+    <span class="s1">print(series[</span><span class="s3">&quot;publishedAt&quot;</span><span class="s1">]</span><span class="s2">, </span><span class="s3">&quot; &quot;</span><span class="s2">, </span><span class="s1">series[</span><span class="s3">&quot;author&quot;</span><span class="s1">]</span><span class="s2">, </span><span class="s3">&quot; &quot;</span><span class="s2">, </span><span class="s1">series[</span><span class="s3">&quot;title&quot;</span><span class="s1">])</span>
+    <span class="s1">published_at = series[</span><span class="s3">&quot;publishedAt&quot;</span><span class="s1">]</span>
+    <span class="s1">author = series[</span><span class="s3">&quot;author&quot;</span><span class="s1">]</span>
+    <span class="s1">title = series[</span><span class="s3">&quot;title&quot;</span><span class="s1">]</span>
+    <span class="s1">row = [published_at</span><span class="s2">, </span><span class="s1">author</span><span class="s2">, </span><span class="s1">title]</span>
+    <span class="s1">writer.writerow(row)</span>
+
+<span class="s0"># close the file</span>
+<span class="s1">f.close()</span>
+
+
+</pre>
+</body>
+</html>
